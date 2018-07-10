@@ -1,0 +1,6 @@
+#+TITLE: todo
+
+- TODO: fix `no REPL is defined for literate-haskell-mode`
+- TODO: fix company in haskell-mode. Taking a look at spacemacs' dante
+  integration might help.
+
