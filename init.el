@@ -12,7 +12,6 @@
        spellcheck        ; tasing you for misspelling mispelling
        (syntax-checker   ; tasing you for every semicolon you forget
         +childframe)     ; use childframes for error popups (Emacs 26+ only)
-       version-control   ; remember, remember that commit in November
        workspaces        ; tab emulation, persistence & separate workspaces
 
        :completion
@@ -36,7 +35,7 @@
        hl-todo           ; highlight TODO/FIXME/NOTE tags
        nav-flash         ; blink the current line after jumping
        neotree           ; a project drawer, like NERDTree for vim
-      ;treemacs          ; a project drawer, like neotree but cooler
+       ;; treemacs          ; a project drawer, like neotree but cooler
        (popup            ; tame sudden yet inevitable temporary windows
         +all             ; catch all popups that start with an asterix
         +defaults)       ; default popup rules
@@ -45,9 +44,11 @@
       ;unicode           ; extended unicode support for various languages
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        window-select     ; visually switch windows
+       vc-gutter
 
        :editor
       ;parinfer          ; turn lisp into python, sort of
+       rotate-text
 
        :emacs
        dired             ; making dired pretty [functional]
@@ -56,6 +57,7 @@
        eshell            ; a consistent, cross-platform shell (WIP)
        imenu             ; an imenu sidebar and searchable code index
        term              ; terminals in Emacs
+       vc
 
        :tools
        editorconfig      ; let someone else argue about tabs vs spaces
@@ -64,21 +66,23 @@
       ;macos             ; MacOS-specific commands
        make              ; run make tasks from Emacs
        magit             ;
-      ;password-store    ; password manager for nerds
+       (password-store    ; password manager for nerds
+        +auth)
        pdf               ; pdf enhancements
       ;prodigy           ; FIXME managing external services & code builders
       ;rgb               ; creating color strings
-       rotate-text       ; cycle region at point between text candidates
       ;tmux              ; an API for interacting with tmux
       ;upload            ; map local to remote projects via ssh/ftp
       ;wakatime
+       ;; lsp
+       org-noter
 
        :lang
       ;assembly          ; assembly for fun or debugging
       ;(cc +irony +rtags); C/C++/Obj-C madness
-      ;common-lisp       ; if you've seen one lisp, you've seen them all
+       common-lisp       ; if you've seen one lisp, you've seen them all
       ;crystal           ; ruby at the speed of c
-      ;clojure           ; java with a lisp
+       clojure           ; java with a lisp
       ;csharp            ; unity, .NET, and mono shenanigans
        data              ; config/data formats
       ;erlang            ; an elegant language for a more civilized age
@@ -87,16 +91,19 @@
        emacs-lisp        ; drown in parentheses
       ;ess               ; emacs speaks statistics
       ;go                ; the hipster dialect
-       (haskell +dante) ; a language that's lazier than I am
+       (haskell
+        +dante) ; a language that's lazier than I am
       ;hy                ; readability of scheme w/ speed of python
       ;(java +meghanada) ; the poster child for carpal tunnel syndrome
       ;javascript        ; all(hope(abandon(ye(who(enter(here))))))
       ;julia             ; a better, faster MATLAB
        (latex             ; writing papers in Emacs has never been so fun
-        +latexmk)
+        +latexmk
+        +pdf-tools)
       ;ledger            ; an accounting system in Emacs
       ;lua               ; one-based indices? one-based indices
-       markdown          ; writing docs for people to ignore
+       (markdown          ; writing docs for people to ignore
+        +pandoc)
       ;nim               ; python + lisp at the speed of c
        nix               ; I hereby declare "nix geht mehr!"
       ;ocaml             ; an objective camel
@@ -142,7 +149,7 @@
        :config
        ;; For literate config users. This will tangle+compile a config.org
        ;; literate config in your `doom-private-dir' whenever it changes.
-      ;literate
+       ;literate
 
        ;; The default module set reasonable defaults for Emacs. It also provides
        ;; a Spacemacs-inspired keybinding scheme, a custom yasnippet library,
