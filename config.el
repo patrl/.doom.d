@@ -1,10 +1,14 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-(setq magit-process-find-password-functions '(magit-process-password-auth-source))
+;; (setq magit-process-find-password-functions '(magit-process-password-auth-source))
+(setq org-directory (expand-file-name "~/Dropbox/org/")
+      org-agenda-files (list org-directory)
+      org-ellipsis " ▼ "
+      org-bullets-bullet-list '("#"))
 
 (after! deft
   (setq deft-directory "~/Dropbox/deft"
-        deft-default-extension "md"
+        deft-default-extension "org"
         deft-use-filter-string-for-filename nil
         deft-use-filename-as-title nil
         deft-org-mode-title-prefix t))
@@ -12,10 +16,10 @@
 (after! tex
   (setq-default TeX-engine 'xetex
                 TeX-PDF-mode t)
-  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
-  )
+  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
 
-(setq markdown-command "pandoc --from=markdown --to=html --katex --highlight-style=haddock")
+(after! markdown
+ (setq markdown-command "pandoc --from=markdown-smart --to=html --katex --highlight-style=haddock"))
 
 (setq +latex-bibtex-file "~/GitHub/bibliography/elliott_mybib.bib")
 (setq +latex-bibtex-dir "~/Dropbox/Library")

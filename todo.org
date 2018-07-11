@@ -1,6 +1,4 @@
-#+TITLE: todo
+#+title: TODO
 
-- TODO: fix `no REPL is defined for literate-haskell-mode`
-- TODO: fix company in haskell-mode. Taking a look at spacemacs' dante
-  integration might help.
-
+ - [ ] get haskell interactive mode working.
+ - [ ] fix repl in literate haskell mode.
