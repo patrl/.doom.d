@@ -6,14 +6,11 @@
 (defvar +latex-bibtex-dir ""
   "Where bibtex files are kept.")
 
-;; (defvar +latex-indent-level-item-continuation 4
-  ;; "Custom indentation level for items in enumeration-type environments")
+(defvar +latex-indent-level-item-continuation 4
+  "Custom indentation level for items in enumeration-type environments")
 
 
 (after! tex
-  ;; Set some varibles to fontify common LaTeX commands.
-  ;; (load! "+fontification")
-
   (setq TeX-parse-self t    ; Enable parse on load.
         TeX-save-query nil  ; just save, don't ask
         TeX-auto-save t     ; Enable parse on save.
@@ -40,11 +37,7 @@
           LaTeX-section-title
           LaTeX-section-toc
           LaTeX-section-section
-          LaTeX-section-label)
-        LaTeX-fill-break-at-separators nil
-        LaTeX-item-indent 0) ; item indentation.
-
-  (define-key LaTeX-mode-map "\C-j" nil)
+          LaTeX-section-label))
 
   ;; Do not prompt for Master files, this allows auto-insert to add templates to
   ;; .tex files
@@ -68,36 +61,35 @@
   (dolist (env '("itemize" "enumerate" "description"))
     (add-to-list 'LaTeX-indent-environment-list `(,env +latex/LaTeX-indent-item)))
 
-  ;; Or PDF-tools, but only if the module is also loaded
-    (add-to-list 'TeX-view-program-selection '(output-pdf "PDF Tools"))
-    ;; Enable auto reverting the PDF document with PDF Tools
-    (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
+  (add-to-list 'TeX-view-program-selection '(output-pdf "PDF Tools"))
+  ;; Enable auto reverting the PDF document with PDF Tools
+  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
 
 
 ;; The preview package is currently broken with the latest AUCTeX version
 ;; ("11.90.2.2017-07-25) ... and Ghostscript 9.22. It's now fixed in AUCTeX
 ;; master, so we just have to wait.
-(def-package! preview
-  :hook (LaTeX-mode . LaTeX-preview-setup)
-  :config
-  (setq-default preview-scale 1.4
-                preview-scale-function
-                (lambda () (* (/ 10.0 (preview-document-pt)) preview-scale))))
+;; (def-package! preview
+;;   :hook (LaTeX-mode . LaTeX-preview-setup)
+;;   :config
+;;   (setq-default preview-scale 1.4
+;;                 preview-scale-function
+;;                 (lambda () (* (/ 10.0 (preview-document-pt)) preview-scale))))
 
 
-(def-package! latex-preview-pane
-  :when (featurep! +preview-pane)
-  :hook ((latex-mode LaTeX-mode) . latex-preview-pane-enable)
-  :commands latex-preview-pane-mode
-  :init
-  (setq latex-preview-pane-multifile-mode 'auctex)
-  :config
-  (add-to-list 'TeX-view-program-list '("preview-pane" latex-preview-pane-mode))
-  (add-to-list 'TeX-view-program-selection '(output-pdf "preview-pane"))
-  (define-key! doc-view-mode-map
-    (kbd "ESC") #'delete-window
-    "q" #'delete-window
-    "k" (λ! (quit-window) (delete-window))))
+;; (def-package! latex-preview-pane
+;;   :when (featurep! +preview-pane)
+;;   :hook ((latex-mode LaTeX-mode) . latex-preview-pane-enable)
+;;   :commands latex-preview-pane-mode
+;;   :init
+;;   (setq latex-preview-pane-multifile-mode 'auctex)
+;;   :config
+;;   (add-to-list 'TeX-view-program-list '("preview-pane" latex-preview-pane-mode))
+;;   (add-to-list 'TeX-view-program-selection '(output-pdf "preview-pane"))
+;;   (define-key! doc-view-mode-map
+;;     (kbd "ESC") #'delete-window
+;;     "q" #'delete-window
+;;     "k" (λ! (quit-window) (delete-window))))
 
 
 (def-package! reftex
@@ -148,10 +140,11 @@
 (def-package! company-reftex
   :after reftex
   :config
-  (set-company-backend! 'reftex-mode 'company-reftex-labels 'company-reftex-citations))
+  (set-company-backend! 'LaTeX-mode 'company-reftex-labels 'company-reftex-citations))
 
 (def-package! company-auctex
-  :hook (LaTeX-mode . company-auctex-init))
+  :hook (LaTeX-mode . ((make-local-variable 'company-backends)
+                       (company-auctex-init))
 
 (def-package! auctex-latexmk
   :when (featurep! +latexmk)
