@@ -56,7 +56,6 @@
   (add-hook! 'LaTeX-mode-hook
     #'(LaTeX-math-mode
        TeX-source-correlate-mode
-       TeX-global-PDF-mode
        TeX-PDF-mode
        visual-line-mode))
   ;; Enable rainbow mode after applying styles to the buffer
@@ -69,16 +68,10 @@
   (dolist (env '("itemize" "enumerate" "description"))
     (add-to-list 'LaTeX-indent-environment-list `(,env +latex/LaTeX-indent-item)))
 
-  ;; Or Zathura
-  (when (featurep! +zathura)
-    (add-to-list 'TeX-view-program-selection '(output-pdf "Zathura")))
-
   ;; Or PDF-tools, but only if the module is also loaded
-  (when (and (featurep! :tools pdf)
-             (featurep! +pdf-tools))
     (add-to-list 'TeX-view-program-selection '(output-pdf "PDF Tools"))
     ;; Enable auto reverting the PDF document with PDF Tools
-    (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)))
+    (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
 
 
 ;; The preview package is currently broken with the latest AUCTeX version
