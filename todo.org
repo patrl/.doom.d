@@ -1,4 +1,15 @@
 #+title: TODO
 
- - [ ] get haskell interactive mode working.
- - [ ] fix repl in literate haskell mode.
+* Haskell improvements
+
+** [X] ~haskell-interactive-mode~
+
+** [X] repl in literate haskell mode
+~open-repl~ doesn't work in literate-haskell-mode
+
+* Org improvements
+
+** [ ] start org with truncated lines automatically
+This has something to do with the ~org-startup-truncated~ variable.
+
+* LaTeX improvements
