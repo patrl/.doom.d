@@ -126,6 +126,7 @@
       ;solidity          ; do you need a blockchain? No.
       ;swift             ; who asked for emoji variables?
        web               ; the tubes
+       dhall
 
        ;; Applications are complex and opinionated modules that transform Emacs
        ;; toward a specific purpose. They may have additional dependencies and
