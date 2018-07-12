@@ -10,16 +10,9 @@
   "Custom indentation level for items in enumeration-type environments")
 
 
-;;
-;; Plugins
-;;
-
-;; sp's default rules are obnoxious, so disable them
-(provide 'smartparens-latex)
-
 (after! tex
   ;; Set some varibles to fontify common LaTeX commands.
-  (load! "+fontification")
+  ;; (load! "+fontification")
 
   (setq TeX-parse-self t    ; Enable parse on load.
         TeX-save-query nil  ; just save, don't ask
@@ -31,16 +24,12 @@
         ;; server
         TeX-source-correlate-start-server nil
         TeX-source-correlate-mode t
-        TeX-source-correlate-method 'synctex
+        TeX-source-correlate-method 'synctex)
         ;; Fonts for section, subsection, etc
-        font-latex-fontify-sectioning 1.15)
+        ;; font-latex-fontify-sectioning 1.15)
   (setq-default TeX-master nil)
   ;; Display the output of the latex commands in a popup.
-  (set-popup-rule! " output\\*$" :size 15)
-
-  ;; TeX Font Styling
-  ;; (def-package! tex-style :defer t)
-
+  ;; (set-popup-rule! " output\\*$" :size 15)
   ;; TeX Folding
   (add-hook 'TeX-mode-hook #'TeX-fold-mode))
 
@@ -79,19 +68,6 @@
   ;; Set a custom item indentation
   (dolist (env '("itemize" "enumerate" "description"))
     (add-to-list 'LaTeX-indent-environment-list `(,env +latex/LaTeX-indent-item)))
-
-  ;;
-  ;; Use Okular if the user says so.
-  (when (featurep! +okular)
-    ;; Configure Okular as viewer. Including a bug fix
-    ;; (https://bugs.kde.org/show_bug.cgi?id=373855)
-    (add-to-list 'TeX-view-program-list '("Okular" ("okular --unique file:%o" (mode-io-correlate "#src:%n%a"))))
-    (add-to-list 'TeX-view-program-selection '(output-pdf "Okular")))
-
-  ;; Or Skim
-  (when (featurep! +skim)
-    (add-to-list 'TeX-view-program-list '("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b"))
-    (add-to-list 'TeX-view-program-selection 'output-pdf '("Skim")))
 
   ;; Or Zathura
   (when (featurep! +zathura)
@@ -170,30 +146,6 @@
   (define-key bibtex-mode-map (kbd "C-c \\") #'bibtex-fill-entry))
 
 
-(def-package! auctex-latexmk
-  :when (featurep! +latexmk)
-  :after-call (latex-mode-hook LaTeX-mode-hook)
-  :init
-  ;; Pass the -pdf flag when TeX-PDF-mode is active
-  (setq auctex-latexmk-inherit-TeX-PDF-mode t)
-  ;; Set LatexMk as the default
-  (setq-hook! LaTeX-mode TeX-command-default "LatexMk")
-  :config
-  ;; Add latexmk as a TeX target
-  (auctex-latexmk-setup))
-
-
-(def-package! ivy-bibtex
-  :when (featurep! :completion ivy)
-  :commands ivy-bibtex
-  )
-
-
-(def-package! helm-bibtex
-  :when (featurep! :completion helm)
-  :commands helm-bibtex
-  )
-
 (after! bibtex-completion
   (unless (string-empty-p +latex-bibtex-file)
     (setq bibtex-completion-bibliography (list (expand-file-name +latex-bibtex-file))))
@@ -201,20 +153,28 @@
     (setq bibtex-completion-library-path (list +latex-bibtex-dir)
           bibtex-completion-notes-path (expand-file-name "notes.org" +latex-bibtex-dir))))
 
+(def-package! company-reftex
+  :after reftex
+  :config
+  (set-company-backend! 'reftex-mode 'company-reftex-labels 'company-reftex-citations))
 
 (def-package! company-auctex
-  :when (featurep! :completion company)
-  :commands (company-auctex-init)
-  :init
-  ;; We can't use the `set-company-backend!' because Auctex reports its
-  ;; major-mode as `latex-mode', but uses LaTeX-mode-hook for its mode, which is
-  ;; not something `set-company-backend!' anticipates (and shouldn't have to!)
-  (add-hook! LaTeX-mode
-    (make-local-variable 'company-backends)
-    (company-auctex-init)))
+  :hook (LaTeX-mode . company-auctex-init))
 
+(def-package! auctex-latexmk
+  :when (featurep! +latexmk)
+  :hook (LaTeX-mode . auctex-latexmk-setup))
 
-;; Nicely indent lines that have wrapped when visual line mode is activated
-(def-package! adaptive-wrap
-  :hook (LaTeX-mode . adaptive-wrap-prefix-mode)
-  :init (setq-default adaptive-wrap-extra-indent 0))
+(def-package! ivy-bibtex
+  :when (featurep! :completion ivy)
+  :commands ivy-bibtex)
+
+(def-package! ebib
+  :commands ebib)
+
+;; FIXME (def-package! company-math)
+
+;; ;; Nicely indent lines that have wrapped when visual line mode is activated
+;; (def-package! adaptive-wrap
+;;   :hook (LaTeX-mode . adaptive-wrap-prefix-mode)
+;;   :init (setq-default adaptive-wrap-extra-indent 0))
