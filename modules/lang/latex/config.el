@@ -9,8 +9,19 @@
 (defvar +latex-indent-level-item-continuation 4
   "Custom indentation level for items in enumeration-type environments")
 
+(def-package! auctex
+  :mode ("\\.tex\\'" . TeX-latex-mode))
+;;
+;; Plugins
+;;
+
+;; sp's default rules are obnoxious, so disable them
+;; (provide 'smartparens-latex)
 
 (after! tex
+  ;; Set some varibles to fontify common LaTeX commands.
+  (load! "+fontification")
+
   (setq TeX-parse-self t    ; Enable parse on load.
         TeX-save-query nil  ; just save, don't ask
         TeX-auto-save t     ; Enable parse on save.
@@ -21,12 +32,16 @@
         ;; server
         TeX-source-correlate-start-server nil
         TeX-source-correlate-mode t
-        TeX-source-correlate-method 'synctex)
+        TeX-source-correlate-method 'synctex
         ;; Fonts for section, subsection, etc
-        ;; font-latex-fontify-sectioning 1.15)
+        font-latex-fontify-sectioning 1.15)
   (setq-default TeX-master nil)
   ;; Display the output of the latex commands in a popup.
-  ;; (set-popup-rule! " output\\*$" :size 15)
+  (set-popup-rule! " output\\*$" :size 15)
+
+  ;; TeX Font Styling
+  ;; (def-package! tex-style :defer t)
+
   ;; TeX Folding
   (add-hook 'TeX-mode-hook #'TeX-fold-mode))
 
@@ -37,7 +52,11 @@
           LaTeX-section-title
           LaTeX-section-toc
           LaTeX-section-section
-          LaTeX-section-label))
+          LaTeX-section-label)
+        LaTeX-fill-break-at-separators nil
+        LaTeX-item-indent 0) ; item indentation.
+
+  (define-key LaTeX-mode-map "\C-j" nil)
 
   ;; Do not prompt for Master files, this allows auto-insert to add templates to
   ;; .tex files
@@ -47,49 +66,52 @@
                  'local))
   ;; Adding useful things for latex
   (add-hook! 'LaTeX-mode-hook
-    #'(LaTeX-math-mode
-       TeX-source-correlate-mode
-       TeX-PDF-mode
+    #'(TeX-source-correlate-mode
        visual-line-mode))
   ;; Enable rainbow mode after applying styles to the buffer
   (add-hook 'TeX-update-style-hook #'rainbow-delimiters-mode)
-  (when (featurep! :feature spellcheck)
-    (add-hook 'LaTeX-mode-hook #'flyspell-mode :append))
   ;; Use chktex to search for errors in a latex file.
   (setcar (cdr (assoc "Check" TeX-command-list)) "chktex -v6 %s")
   ;; Set a custom item indentation
   (dolist (env '("itemize" "enumerate" "description"))
     (add-to-list 'LaTeX-indent-environment-list `(,env +latex/LaTeX-indent-item)))
 
-  (add-to-list 'TeX-view-program-selection '(output-pdf "PDF Tools"))
-  ;; Enable auto reverting the PDF document with PDF Tools
-  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
+  ;; Or Zathura
+  (when (featurep! +zathura)
+    (add-to-list 'TeX-view-program-selection '(output-pdf "Zathura")))
+
+  ;; Or PDF-tools, but only if the module is also loaded
+  (when (and (featurep! :tools pdf)
+             (featurep! +pdf-tools))
+    (add-to-list 'TeX-view-program-selection '(output-pdf "PDF Tools"))
+    ;; Enable auto reverting the PDF document with PDF Tools
+    (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)))
 
 
 ;; The preview package is currently broken with the latest AUCTeX version
 ;; ("11.90.2.2017-07-25) ... and Ghostscript 9.22. It's now fixed in AUCTeX
 ;; master, so we just have to wait.
-;; (def-package! preview
-;;   :hook (LaTeX-mode . LaTeX-preview-setup)
-;;   :config
-;;   (setq-default preview-scale 1.4
-;;                 preview-scale-function
-;;                 (lambda () (* (/ 10.0 (preview-document-pt)) preview-scale))))
+(def-package! preview
+  :hook (LaTeX-mode . LaTeX-preview-setup)
+  :config
+  (setq-default preview-scale 1.4
+                preview-scale-function
+                (lambda () (* (/ 10.0 (preview-document-pt)) preview-scale))))
 
 
-;; (def-package! latex-preview-pane
-;;   :when (featurep! +preview-pane)
-;;   :hook ((latex-mode LaTeX-mode) . latex-preview-pane-enable)
-;;   :commands latex-preview-pane-mode
-;;   :init
-;;   (setq latex-preview-pane-multifile-mode 'auctex)
-;;   :config
-;;   (add-to-list 'TeX-view-program-list '("preview-pane" latex-preview-pane-mode))
-;;   (add-to-list 'TeX-view-program-selection '(output-pdf "preview-pane"))
-;;   (define-key! doc-view-mode-map
-;;     (kbd "ESC") #'delete-window
-;;     "q" #'delete-window
-;;     "k" (λ! (quit-window) (delete-window))))
+(def-package! latex-preview-pane
+  :when (featurep! +preview-pane)
+  :hook ((latex-mode LaTeX-mode) . latex-preview-pane-enable)
+  :commands latex-preview-pane-mode
+  :init
+  (setq latex-preview-pane-multifile-mode 'auctex)
+  :config
+  (add-to-list 'TeX-view-program-list '("preview-pane" latex-preview-pane-mode))
+  (add-to-list 'TeX-view-program-selection '(output-pdf "preview-pane"))
+  (define-key! doc-view-mode-map
+    (kbd "ESC") #'delete-window
+    "q" #'delete-window
+    "k" (λ! (quit-window) (delete-window))))
 
 
 (def-package! reftex
@@ -130,6 +152,22 @@
   (define-key bibtex-mode-map (kbd "C-c \\") #'bibtex-fill-entry))
 
 
+(def-package! auctex-latexmk
+  :when (featurep! +latexmk)
+  :after-call (latex-mode-hook LaTeX-mode-hook)
+  :init
+  ;; Pass the -pdf flag when TeX-PDF-mode is active
+  (setq auctex-latexmk-inherit-TeX-PDF-mode t)
+  ;; Set LatexMk as the default
+  (setq-hook! LaTeX-mode TeX-command-default "LatexMk")
+  :config
+  ;; Add latexmk as a TeX target
+  (auctex-latexmk-setup))
+
+(def-package! ivy-bibtex
+  :when (featurep! :completion ivy)
+  :commands ivy-bibtex)
+
 (after! bibtex-completion
   (unless (string-empty-p +latex-bibtex-file)
     (setq bibtex-completion-bibliography (list (expand-file-name +latex-bibtex-file))))
@@ -140,26 +178,27 @@
 (def-package! company-reftex
   :after reftex
   :config
-  (set-company-backend! 'LaTeX-mode 'company-reftex-labels 'company-reftex-citations))
+  (set-company-backend! 'reftex-mode 'company-reftex-labels 'company-reftex-citations))
 
+;; unicode unicode everywhere
 (def-package! company-auctex
-  :hook (LaTeX-mode . ((make-local-variable 'company-backends)
-                       (company-auctex-init))
+  :after latex
+  :config
+  (def-package! company-math
+    :defer t
+    :init
+    (add-hook! LaTeX-mode
+      (setq-local company-math-allow-unicode-symbols-in-faces (quote (tex-math font-latex-math-face)))
+      (setq-local company-math-disallow-unicode-symbols-in-faces nil)
+      (setq-local company-math-allow-latex-symbols-in-faces nil)
+      (setq-local company-backends
+                  (append '((company-math-symbols-latex
+                             company-math-symbols-unicode
+                             company-auctex-macros
+                             company-auctex-environments))
+                          company-backends)))))
 
-(def-package! auctex-latexmk
-  :when (featurep! +latexmk)
-  :hook (LaTeX-mode . auctex-latexmk-setup))
-
-(def-package! ivy-bibtex
-  :when (featurep! :completion ivy)
-  :commands ivy-bibtex)
-
-(def-package! ebib
-  :commands ebib)
-
-;; FIXME (def-package! company-math)
-
-;; ;; Nicely indent lines that have wrapped when visual line mode is activated
-;; (def-package! adaptive-wrap
-;;   :hook (LaTeX-mode . adaptive-wrap-prefix-mode)
-;;   :init (setq-default adaptive-wrap-extra-indent 0))
+;; Nicely indent lines that have wrapped when visual line mode is activated
+(def-package! adaptive-wrap
+  :hook (LaTeX-mode . adaptive-wrap-prefix-mode)
+  :init (setq-default adaptive-wrap-extra-indent 0))

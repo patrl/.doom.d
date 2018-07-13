@@ -13,3 +13,5 @@
 This has something to do with the ~org-startup-truncated~ variable.
 
 * LaTeX improvements
+
+** [ ] get ~company-math~ working properly

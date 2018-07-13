@@ -76,6 +76,7 @@
       ;wakatime
        ;; lsp
        org-noter
+       ebib
 
        :lang
       ;assembly          ; assembly for fun or debugging

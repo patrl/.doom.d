@@ -17,9 +17,7 @@
         deft-org-mode-title-prefix t))
 
 (after! tex
-  (setq-default TeX-engine 'xetex
-                TeX-PDF-mode t)
-  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
+  (setq-default TeX-engine 'xetex))
 
 (setq markdown-command "pandoc --standalone --css=http://benjam.info/pan-am/styling.css -V lang=en -V highlighting-css= --mathjax --from=markdown+smart --to=html5")
 
@@ -32,3 +30,4 @@
       doom-unicode-font (font-spec :family "DejaVu Sans Mono")
       doom-big-font (font-spec :family "SF Mono" :size 18.0)
       doom-theme 'doom-one)
+

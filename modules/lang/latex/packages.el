@@ -12,10 +12,14 @@
 (when (featurep! +preview-pane)
   (package! latex-preview-pane))
 
-(package! company-auctex)
-(package! company-reftex)
-(package! ivy-bibtex)
-(package! company-math)
-(package! ebib)
+;; Features according to other user selected options
 
+(when (featurep! :completion company)
+  (package! company-auctex)
+  (package! company-reftex)
+  (package! company-math))
+(when (featurep! :completion ivy)
+  (package! ivy-bibtex))
+(when (featurep! :completion helm)
+  (package! helm-bibtex))
 
