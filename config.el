@@ -31,3 +31,26 @@
       doom-big-font (font-spec :family "SF Mono" :size 18.0)
       doom-theme 'doom-one)
 
+(when (featurep! :emacs electric)
+  (add-hook 'haskell-mode-hook 'electric-indent-local-mode))
+
+;; Useful when using CamelCase with variable and function names.
+(add-hook 'haskell-mode-hook 'subword-mode)
+
+(add-hook 'haskell-mode-hook 'haskell-collapse-mode)
+
+(custom-set-variables
+  '(haskell-process-suggest-remove-import-lines t)
+  '(haskell-process-auto-import-loaded-modules t)
+  '(haskell-process-log t))
+
+(def-package! hlint-refactor
+  :hook (haskell-mode . hlint-refactor-mode))
+
+;; dante already defines a keybinding for this.
+(def-package! attrap
+  :commands (attrap-attrap))
+
+
+
+
