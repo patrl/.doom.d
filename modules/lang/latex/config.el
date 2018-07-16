@@ -16,7 +16,7 @@
 ;;
 
 ;; sp's default rules are obnoxious, so disable them
-;; (provide 'smartparens-latex)
+(provide 'smartparens-latex)
 
 (after! tex
   ;; Set some varibles to fontify common LaTeX commands.
@@ -54,7 +54,7 @@
           LaTeX-section-section
           LaTeX-section-label)
         LaTeX-fill-break-at-separators nil
-        LaTeX-item-indent 0) ; item indentation.
+        LaTeX-item-indent 0)
 
   (define-key LaTeX-mode-map "\C-j" nil)
 
@@ -86,33 +86,6 @@
     (add-to-list 'TeX-view-program-selection '(output-pdf "PDF Tools"))
     ;; Enable auto reverting the PDF document with PDF Tools
     (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)))
-
-
-;; The preview package is currently broken with the latest AUCTeX version
-;; ("11.90.2.2017-07-25) ... and Ghostscript 9.22. It's now fixed in AUCTeX
-;; master, so we just have to wait.
-(def-package! preview
-  :hook (LaTeX-mode . LaTeX-preview-setup)
-  :config
-  (setq-default preview-scale 1.4
-                preview-scale-function
-                (lambda () (* (/ 10.0 (preview-document-pt)) preview-scale))))
-
-
-(def-package! latex-preview-pane
-  :when (featurep! +preview-pane)
-  :hook ((latex-mode LaTeX-mode) . latex-preview-pane-enable)
-  :commands latex-preview-pane-mode
-  :init
-  (setq latex-preview-pane-multifile-mode 'auctex)
-  :config
-  (add-to-list 'TeX-view-program-list '("preview-pane" latex-preview-pane-mode))
-  (add-to-list 'TeX-view-program-selection '(output-pdf "preview-pane"))
-  (define-key! doc-view-mode-map
-    (kbd "ESC") #'delete-window
-    "q" #'delete-window
-    "k" (λ! (quit-window) (delete-window))))
-
 
 (def-package! reftex
   :hook ((latex-mode LaTeX-mode) . turn-on-reftex)
