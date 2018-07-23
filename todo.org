@@ -1,17 +1,26 @@
 #+title: TODO
 
-* Haskell improvements
+* Haskell
 
-** [X] ~haskell-interactive-mode~
+** [ ] integrate `hlint-refactor` into `attrap-attrap`
 
-** [X] repl in literate haskell mode
-~open-repl~ doesn't work in literate-haskell-mode
-
-* Org improvements
+* Org
 
 ** [ ] start org with truncated lines automatically
 This has something to do with the ~org-startup-truncated~ variable.
+** [ ] stop org files from hanging due to `org-clock-save`
 
-* LaTeX improvements
+* LaTeX
 
-** [ ] get ~company-math~ working properly
+* Nix
+
+* ebib
+** [ ] define `evil`-compatible bindings
+
+
+
+* eshell
+** [ ] set-up config
+aliases etc.
+
+
