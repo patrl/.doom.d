@@ -1,5 +1,8 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
+(setq user-full-name "Patrick D. Elliott"
+      user-mail-address "patrick.d.elliott@gmail.com")
+
 (load! "+bindings.el")
 
 (setq magit-process-find-password-functions '(magit-process-password-auth-source))
@@ -19,38 +22,44 @@
 (after! tex
   (setq-default TeX-engine 'xetex))
 
-(setq markdown-command "pandoc --standalone --css=http://benjam.info/pan-am/styling.css -V lang=en -V highlighting-css= --mathjax --from=markdown+smart --to=html5")
+(setq markdown-command "pandoc --filter pandoc-citeproc --standalone --css=http://benjam.info/pan-am/styling.css -V lang=en -V highlighting-css= --mathjax --from=markdown+smart --to=html5"
+      markdown-enable-math t)
 
-(setq +latex-bibtex-file "~/GitHub/bibliography/elliott_mybib.bib")
-(setq +latex-bibtex-dir "~/Dropbox/Library")
-(setq ivy-bibtex-default-action 'ivy-bibtex-open-pdf)
+(setq bibtex-completion-library-path "~/Dropbox/Library/"
+      +latex-bibtex-file "~/GitHub/bibliography/elliott_mybib.bib"
+      ivy-bibtex-default-action 'ivy-bibtex-open-pdf)
 
-(setq doom-font (font-spec :family "SF Mono" :adstyle "Retina" :size 11.0)
-      ;; doom-variable-pitch-font (font-spec :family "Input Sans")
+(setq doom-font (font-spec :family "Input Mono" :size 11.0)
+      doom-variable-pitch-font (font-spec :family "Input Sans")
       doom-unicode-font (font-spec :family "DejaVu Sans Mono")
-      doom-big-font (font-spec :family "SF Mono" :size 18.0)
-      doom-theme 'doom-one)
-
-(when (featurep! :emacs electric)
-  (add-hook 'haskell-mode-hook 'electric-indent-local-mode))
-
-;; Useful when using CamelCase with variable and function names.
-(add-hook 'haskell-mode-hook 'subword-mode)
-
-(add-hook 'haskell-mode-hook 'haskell-collapse-mode)
-
-(custom-set-variables
-  '(haskell-process-suggest-remove-import-lines t)
-  '(haskell-process-auto-import-loaded-modules t)
-  '(haskell-process-log t))
+      doom-big-font (font-spec :family "Input Mono" :size 18.0)
+      doom-theme 'doom-one-light)
 
 (def-package! hlint-refactor
   :hook (haskell-mode . hlint-refactor-mode))
 
-;; dante already defines a keybinding for this.
-(def-package! attrap
-  :commands (attrap-attrap))
+(setq org-highlight-latex-and-related '(latex))
 
+(global-set-key (kbd "<f5>") #'deadgrep)
 
+;; emacs/eshell
+(after! eshell
+  (set-eshell-alias!
+   "f"   "find-file $1"
+   "l"   "ls -lh"
+   "d"   "dired $1"
+   "gl"  "(call-interactively 'magit-log-current)"
+   "gs"  "magit-status"
+   "gc"  "magit-commit"
+   "rg"  "rg --color=always $*"))
 
+(setq +magit-hub-features t
+      magithub-clone-default-directory "~/GitHub/")
 
+;; disable line numbers in text and derived modes.
+(add-hook 'text-mode-hook #'doom|disable-line-numbers)
+
+;; tweaks for markdown mode.
+(add-hook 'markdown-mode-hook #'doom|disable-line-numbers)
+(add-hook 'markdown-mode-hook 'visual-line-mode)
+(add-hook 'markdown-mode-hook 'turn-on-olivetti-mode)

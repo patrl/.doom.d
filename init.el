@@ -92,14 +92,15 @@
        emacs-lisp        ; drown in parentheses
       ;ess               ; emacs speaks statistics
       ;go                ; the hipster dialect
-       haskell                               ; a language that's lazier than I am
+       (haskell +dante)  ; a language that's lazier than I am
       ;hy                ; readability of scheme w/ speed of python
       ;(java +meghanada) ; the poster child for carpal tunnel syndrome
       ;javascript        ; all(hope(abandon(ye(who(enter(here))))))
       ;julia             ; a better, faster MATLAB
        (latex             ; writing papers in Emacs has never been so fun
         +latexmk
-        +pdf-tools)
+        +pdf-tools
+        +unicode-math)
       ;ledger            ; an accounting system in Emacs
       ;lua               ; one-based indices? one-based indices
        (markdown          ; writing docs for people to ignore
@@ -127,7 +128,6 @@
       ;solidity          ; do you need a blockchain? No.
       ;swift             ; who asked for emoji variables?
        web               ; the tubes
-       dhall
 
        ;; Applications are complex and opinionated modules that transform Emacs
        ;; toward a specific purpose. They may have additional dependencies and
