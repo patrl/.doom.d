@@ -1,0 +1,54 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /home/patrl/.doom.d/todo.org
+
+
+* [X] integrate `nix-update`
+:PROPERTIES:
+:ARCHIVE_TIME: 2018-07-16 Mon 18:36
+:ARCHIVE_FILE: ~/.doom.d/todo.org
+:ARCHIVE_OLPATH: Nix
+:ARCHIVE_CATEGORY: todo
+:ARCHIVE_TODO: [X]
+:END:
+
+
+Archived entries from file /home/patrl/.doom.d/todo.org
+
+
+* [X] get ~company-math~ working properly
+:PROPERTIES:
+:ARCHIVE_TIME: 2018-07-16 Mon 18:37
+:ARCHIVE_FILE: ~/.doom.d/todo.org
+:ARCHIVE_OLPATH: LaTeX
+:ARCHIVE_CATEGORY: todo
+:ARCHIVE_TODO: [X]
+:END:
+
+
+Archived entries from file /home/patrl/.doom.d/todo.org
+
+
+* [X] repl in literate haskell mode
+:PROPERTIES:
+:ARCHIVE_TIME: 2018-07-16 Mon 18:37
+:ARCHIVE_FILE: ~/.doom.d/todo.org
+:ARCHIVE_OLPATH: Haskell
+:ARCHIVE_CATEGORY: todo
+:ARCHIVE_TODO: [X]
+:END:
+~open-repl~ doesn't work in literate-haskell-mode
+
+Archived entries from file /home/patrl/.doom.d/todo.org
+
+
+* [X] ~haskell-interactive-mode~
+:PROPERTIES:
+:ARCHIVE_TIME: 2018-07-16 Mon 18:37
+:ARCHIVE_FILE: ~/.doom.d/todo.org
+:ARCHIVE_OLPATH: Haskell
+:ARCHIVE_CATEGORY: todo
+:ARCHIVE_TODO: [X]
+:END:
+
