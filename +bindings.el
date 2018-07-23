@@ -13,3 +13,8 @@
      :desc "Search bibliography" :n "b" #'ivy-bibtex)
    ))
 
+(after! haskell-mode
+  (map! :map haskell-mode-map
+        :localleader
+        :desc "hlint refactor" :n "A" #'hlint-refactor-refactor-at-point))
+
