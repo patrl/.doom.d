@@ -1,23 +1,27 @@
-#+title: TODO
+#+title: todo
 
 * Haskell
 
-** [ ] integrate ~hlint-refactor~ into ~attrap-attrap~
-** [ ] write emacs package from ~brittany~
+** TODO integrate ~hlint-refactor~ into ~attrap-attrap~
+** TODO write emacs package from ~brittany~
 
 * Org
 
-** [ ] start org with truncated lines automatically
+** TODO start org with truncated lines automatically
 This has something to do with the ~org-startup-truncated~ variable.
-** [ ] stop org files from hanging due to `org-clock-save`
+** TODO stop org files from hanging due to `org-clock-save`
 
 * ebib
-** [ ] define evil-compatible bindings
+** TODO define evil-compatible bindings
 
 * eshell
-** [ ] set-up config
+** TODO set-up config
 aliases etc.
 
 * Snippets
 
-** [ ] set-up some useful snippets for haskell
+** TODO set-up some useful snippets for haskell
+
+* deft
+
+** TODO get ~deft~ to auto-insert titles for new org-mode files
