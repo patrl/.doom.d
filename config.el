@@ -14,10 +14,14 @@
 
 (after! deft
   (setq deft-directory "~/Dropbox/deft"
+        deft-extensions '("md" "org")
         deft-default-extension "org"
-        deft-use-filter-string-for-filename nil
+        deft-use-filter-string-for-filename t
         deft-use-filename-as-title nil
-        deft-org-mode-title-prefix t))
+        deft-org-mode-title-prefix t
+        deft-file-naming-rules '((noslash . "")
+                                 (nospace . "")
+                                 (case-fn . capitalize))))
 
 (after! tex
   (setq-default TeX-engine 'xetex))
@@ -54,7 +58,16 @@
    "rg"  "rg --color=always $*"))
 
 (setq +magit-hub-features t
-      magithub-clone-default-directory "~/GitHub/")
+      magithub-clone-default-directory "~/GitHub/"
+      magit-commit-arguments '("--gpg-sign=7CA109C3974AF5FA")
+      magit-rebase-arguments '("--autostash" "--gpg-sign=7CA109C3974AF5FA")
+      magit-pull-arguments '("--rebase" "--autostash" "--gpg-sign=7CA109C3974AF5FA"))
+
+
+(after! magit
+  ;; Add gpg-sign to rebasing by default
+  (magit-define-popup-option 'magit-rebase-popup
+    ?S "Sign using gpg" "--gpg-sign=" #'magit-read-gpg-secret-key))
 
 ;; disable line numbers in text and derived modes.
 (add-hook 'text-mode-hook #'doom|disable-line-numbers)
@@ -63,3 +76,10 @@
 (add-hook 'markdown-mode-hook #'doom|disable-line-numbers)
 (add-hook 'markdown-mode-hook 'visual-line-mode)
 (add-hook 'markdown-mode-hook 'turn-on-olivetti-mode)
+
+(add-hook 'dante-mode-hook
+          #'(lambda ()
+              (yas-activate-extra-mode 'dante-mode)))
+
+;; `counsel-linux-app` looks in the right place for applications
+(setq counsel-linux-apps-directories '("/var/run/current-system/sw/share/applications"))
