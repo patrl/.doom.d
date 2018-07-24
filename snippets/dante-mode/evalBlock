@@ -1,5 +1,7 @@
 # -*- mode: snippet -*-
-# name: evalBlock
+# name: eval block
 # key: trigger-key
 # condition: t
 # --
+
+ -- >>> $0
