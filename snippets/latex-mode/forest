@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: forest
+# key: \begfor
+# expand-env: ((yas-indent-line 'fixed) (yas-triggers-in-field 't))
+# --
+
+\begin{forest}
+[{${1:...}}
+  [{${2:...}}]
+$>[${3:{...}}]]
+\end{forest}
+$0

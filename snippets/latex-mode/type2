@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: type2
+# key: \ty
+# expand-env: ((yas-triggers-in-field 't) (yas-indent-line 'fixed))
+# --
+
+⟨ $1 , $2 ⟩

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: function composition
+# key: \compose
+# condition: t
+# --
+
+$1 ∘ $2 $0
+

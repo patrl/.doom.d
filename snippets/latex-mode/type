@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: type
+# key: \type
+# expand-env: ((yas-triggers-in-field 't) (yas-indent-line 'fixed))
+# --
+
+\type{⟨ $1 , $2 ⟩}
+$0

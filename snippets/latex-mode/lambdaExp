@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: lambda expression
+# key: \lamexp
+# expand-env: ((yas-triggers-in-field 'nil))
+# --
+
+λ${1:x} . ${2:x} $0

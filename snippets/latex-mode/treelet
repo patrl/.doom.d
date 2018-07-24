@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: treelet
+# key: \cont
+# condition: t
+# expand-env: ((yas-indent-line 'fixed) (yas-triggers-in-field 't))
+# --
+
+{${1:...}}
+  [{${2:...}}]
+$>[${3:{...}}]

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: new example
+# key: \ex
+# expand-env: ((yas-indent-line 'fixed))
+# --
+
+\ex
+\label{$1}$2
+\xe
+$>$0

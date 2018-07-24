@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: new multi-line example
+# key: \pex
+# expand-env: ((yas-indent-line 'fixed))
+# --
+
+\pex\label{$1}
+\a\label{$2}$3
+\a\label{$4}$5
+\xe
+$>$0
