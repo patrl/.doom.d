@@ -2,7 +2,8 @@
 
 * Haskell
 
-** [ ] integrate `hlint-refactor` into `attrap-attrap`
+** [ ] integrate ~hlint-refactor~ into ~attrap-attrap~
+** [ ] write emacs package from ~brittany~
 
 * Org
 
@@ -10,17 +11,13 @@
 This has something to do with the ~org-startup-truncated~ variable.
 ** [ ] stop org files from hanging due to `org-clock-save`
 
-* LaTeX
-
-* Nix
-
 * ebib
-** [ ] define `evil`-compatible bindings
-
-
+** [ ] define evil-compatible bindings
 
 * eshell
 ** [ ] set-up config
 aliases etc.
 
+* Snippets
 
+** [ ] set-up some useful snippets for haskell
