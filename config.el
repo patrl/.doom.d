@@ -29,8 +29,10 @@
 (setq markdown-command "pandoc --filter pandoc-citeproc --standalone --css=http://benjam.info/pan-am/styling.css -V lang=en -V highlighting-css= --mathjax --from=markdown+smart --to=html5"
       markdown-enable-math t)
 
-(setq bibtex-completion-library-path "~/Dropbox/Library/"
+(setq bibtex-completion-library-path "~/dat/library/"
       +latex-bibtex-file "~/GitHub/bibliography/elliott_mybib.bib"
+      +latex-enable-unicode-math t
+      +latex-viewers `(pdf-tools zathura)
       ivy-bibtex-default-action 'ivy-bibtex-open-pdf)
 
 (setq doom-font (font-spec :family "Input Mono" :size 11.0)
@@ -83,3 +85,5 @@
 
 ;; `counsel-linux-app` looks in the right place for applications
 (setq counsel-linux-apps-directories '("/var/run/current-system/sw/share/applications"))
+
+(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))

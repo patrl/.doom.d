@@ -13,6 +13,7 @@ This has something to do with the ~org-startup-truncated~ variable.
 
 * ebib
 ** TODO define evil-compatible bindings
+** TODO make the ~date~ field display instead of ~year~
 
 * eshell
 ** TODO set-up config
@@ -25,3 +26,12 @@ aliases etc.
 * deft
 
 ** TODO get ~deft~ to auto-insert titles for new org-mode files
+Maybe file templates are messing with this?
+
+* Markdown
+
+** TODO fontification for superscript and subscript
+
+* Nix
+
+** TODO fix nix files opening in fundamental mode
