@@ -7,13 +7,13 @@
 
 (setq magit-process-find-password-functions '(magit-process-password-auth-source))
 
-(setq org-directory (expand-file-name "~/Dropbox/org/")
+(setq org-directory (expand-file-name "~/Sync/org/")
       org-agenda-files (list org-directory)
       org-ellipsis " ▼ "
       org-bullets-bullet-list '("#"))
 
 (after! deft
-  (setq deft-directory "~/Dropbox/deft"
+  (setq deft-directory "~/Sync/deft"
         deft-extensions '("md" "org")
         deft-default-extension "org"
         deft-use-filter-string-for-filename t
@@ -29,7 +29,7 @@
 (setq markdown-command "pandoc --filter pandoc-citeproc --standalone --css=http://benjam.info/pan-am/styling.css -V lang=en -V highlighting-css= --mathjax --from=markdown+smart --to=html5"
       markdown-enable-math t)
 
-(setq bibtex-completion-library-path "~/dat/library/"
+(setq bibtex-completion-library-path "~/Sync/library/"
       +latex-bibtex-file "~/GitHub/bibliography/elliott_mybib.bib"
       +latex-enable-unicode-math t
       +latex-viewers `(pdf-tools zathura)
