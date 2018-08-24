@@ -23,6 +23,8 @@
                                  (nospace . "")
                                  (case-fn . capitalize))))
 
+(setq nix-indent-function 'nix-indent-line)
+
 (after! tex
   (setq-default TeX-engine 'xetex))
 
@@ -34,6 +36,11 @@
       +latex-enable-unicode-math t
       +latex-viewers `(pdf-tools zathura)
       ivy-bibtex-default-action 'ivy-bibtex-open-pdf)
+
+(after! latex
+  (add-hook! 'LaTeX-mode-hook
+      (setq-local company-math-allow-unicode-symbols-in-faces (quote (tex-math font-latex-math-face)))
+      (setq-local company-math-disallow-unicode-symbols-in-faces nil)))
 
 (setq doom-font (font-spec :family "Input Mono" :size 11.0)
       doom-variable-pitch-font (font-spec :family "Input Sans")
