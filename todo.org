@@ -1,5 +1,13 @@
 #+title: todo
 
+* agda
+
+** TODO add keybindings 
+
+* TeX
+
+** TODO fix regression: unicode completion only outside of math mode
+
 * Haskell
 
 ** TODO integrate ~hlint-refactor~ into ~attrap-attrap~
