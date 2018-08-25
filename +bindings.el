@@ -10,7 +10,7 @@
      :desc "Search in project" :n "s" #'counsel-projectile-rg)
 
    (:desc "notes" :prefix "n"
-     :desc "Search bibliography" :n "b" #'ivy-bibtex)
+     :desc "Search bibliography" :n "b" #'helm-bibtex)
    ))
 
 (after! haskell-mode

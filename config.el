@@ -13,15 +13,7 @@
       org-bullets-bullet-list '("#"))
 
 (after! deft
-  (setq deft-directory "~/Sync/deft"
-        deft-extensions '("md" "org")
-        deft-default-extension "org"
-        deft-use-filter-string-for-filename t
-        deft-use-filename-as-title nil
-        deft-org-mode-title-prefix t
-        deft-file-naming-rules '((noslash . "")
-                                 (nospace . "")
-                                 (case-fn . capitalize))))
+  (setq deft-directory "~/Sync/deft"))
 
 (setq nix-indent-function 'nix-indent-line)
 

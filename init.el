@@ -18,21 +18,22 @@
        (company          ; the ultimate code completion backend
         +auto            ; as-you-type code completion
         +childframe)
-      ;(helm             ; the *other* search engine for love and life
-      ; +fuzzy)          ; enable fuzzy search backend for helm
+      (helm             ; the *other* search engine for love and life
+       +fuzzy)          ; enable fuzzy search backend for helm
       ;ido               ; the other *other* search engine...
-       (ivy              ; a search engine for love and life
-        +fuzzy           ; enable fuzzy search backend for ivy
-        +childframe)
+      ;(ivy              ; a search engine for love and life
+      ; +fuzzy           ; enable fuzzy search backend for ivy
+      ; +childframe)
 
        :ui
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
-       modeline     ; a snazzy Atom-inspired mode-line
+       ;doom-modeline     ; a snazzy Atom-inspired mode-line
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
        evil-goggles      ; display visual hints when editing in evil
       ;fci               ; a `fill-column' indicator
        hl-todo           ; highlight TODO/FIXME/NOTE tags
+       modeline
        nav-flash         ; blink the current line after jumping
        ;; neotree           ; a project drawer, like NERDTree for vim
        treemacs          ; a project drawer, like neotree but cooler
@@ -47,6 +48,8 @@
        vc-gutter
 
        :editor
+       format
+       multiple-cursors
       ;parinfer          ; turn lisp into python, sort of
        rotate-text
 
@@ -55,6 +58,7 @@
        ediff             ; comparing files in Emacs
        electric          ; smarter, keyword-based electric-indent
        eshell            ; a consistent, cross-platform shell (WIP)
+       hideshow
        imenu             ; an imenu sidebar and searchable code index
        term              ; terminals in Emacs
        vc
@@ -77,6 +81,7 @@
        ;; lsp
        org-noter
        ebib
+       deft
 
        :lang
       ;assembly          ; assembly for fun or debugging
@@ -143,7 +148,6 @@
       ;(write            ; emacs as a word processor (latex + org + markdown)
       ; +wordnut         ; wordnet (wn) search
       ; +langtool)       ; a proofreader (grammar/style check) for Emacs
-       deft
       ;; exwm
 
        :collab
