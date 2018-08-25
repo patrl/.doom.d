@@ -52,3 +52,54 @@ Archived entries from file /home/patrl/.doom.d/todo.org
 :ARCHIVE_TODO: [X]
 :END:
 
+
+* DONE fix regression: unicode completion only outside of math mode
+:PROPERTIES:
+:ARCHIVE_TIME: 2018-08-25 Sat 14:51
+:ARCHIVE_FILE: ~/.doom.d/todo.org
+:ARCHIVE_OLPATH: TeX
+:ARCHIVE_CATEGORY: todo
+:ARCHIVE_TODO: DONE
+:END:
+
+
+* DONE fix nix files opening in fundamental mode
+:PROPERTIES:
+:ARCHIVE_TIME: 2018-08-25 Sat 14:54
+:ARCHIVE_FILE: ~/.doom.d/todo.org
+:ARCHIVE_OLPATH: Nix
+:ARCHIVE_CATEGORY: todo
+:ARCHIVE_TODO: DONE
+:END:
+
+* DONE set-up some useful snippets for haskell
+:PROPERTIES:
+:ARCHIVE_TIME: 2018-08-25 Sat 14:54
+:ARCHIVE_FILE: ~/.doom.d/todo.org
+:ARCHIVE_OLPATH: Snippets
+:ARCHIVE_CATEGORY: todo
+:ARCHIVE_TODO: DONE
+:END:
+
+
+* DONE make the ~date~ field display instead of ~year~
+:PROPERTIES:
+:ARCHIVE_TIME: 2018-08-25 Sat 14:54
+:ARCHIVE_FILE: ~/.doom.d/todo.org
+:ARCHIVE_OLPATH: ebib
+:ARCHIVE_CATEGORY: todo
+:ARCHIVE_TODO: DONE
+:END:
+Fixed in a subsequent commit.
+
+
+* DONE stop org files from hanging due to `org-clock-save`
+:PROPERTIES:
+:ARCHIVE_TIME: 2018-08-25 Sat 14:55
+:ARCHIVE_FILE: ~/.doom.d/todo.org
+:ARCHIVE_OLPATH: Org
+:ARCHIVE_CATEGORY: todo
+:ARCHIVE_TODO: DONE
+:END:
+This somehow went away by itself.
+

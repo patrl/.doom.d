@@ -3,11 +3,9 @@
 * agda
 
 ** TODO add keybindings 
-
+* idris
+** TODO fix ~helm-idris~
 * TeX
-
-** TODO fix regression: unicode completion only outside of math mode
-
 * Haskell
 
 ** TODO integrate ~hlint-refactor~ into ~attrap-attrap~
@@ -17,19 +15,13 @@
 
 ** TODO start org with truncated lines automatically
 This has something to do with the ~org-startup-truncated~ variable.
-** TODO stop org files from hanging due to `org-clock-save`
-
 * ebib
 ** TODO define evil-compatible bindings
-** TODO make the ~date~ field display instead of ~year~
-
 * eshell
 ** TODO set-up config
 aliases etc.
 
 * Snippets
-
-** TODO set-up some useful snippets for haskell
 
 * deft
 
@@ -42,4 +34,3 @@ Maybe file templates are messing with this?
 
 * Nix
 
-** TODO fix nix files opening in fundamental mode
