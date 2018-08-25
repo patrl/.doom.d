@@ -18,3 +18,6 @@
         :n "p" #'idris-proof-search
         :n "h" #'idris-docs-at-point))
 
+(def-package! helm-idris
+  :after idris-mode)
+
