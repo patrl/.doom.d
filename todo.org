@@ -1,11 +1,11 @@
 #+title: todo
 
+* coq
+** TODO only put the ~company~ features of ~company-coq~ behind a conditional 
 * agda
 
-** TODO add keybindings 
-* idris
-** TODO fix ~helm-idris~
-* TeX
+** TODO add keybindings
+** TODO fix highlight faces (they look terrible in dark faces)
 * Haskell
 
 ** TODO integrate ~hlint-refactor~ into ~attrap-attrap~
@@ -32,5 +32,5 @@ Maybe file templates are messing with this?
 
 ** TODO fontification for superscript and subscript
 
-* Nix
-
+* Misc
+** TODO make unicode fallback font work without hacks
