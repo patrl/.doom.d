@@ -2,15 +2,12 @@
 
 (map!
  (:leader
-   (:desc "open" :prefix "o"
-     :desc "APP: deft" :n "D" #'deft)
-
    (:desc "project" :prefix "p"
-     :desc "Make project" :n "m" #'+make/run
-     :desc "Search in project" :n "s" #'counsel-projectile-rg)
+     :desc "Make project" :n "m" #'+make/run)
 
    (:desc "notes" :prefix "n"
-     :desc "Search bibliography" :n "b" #'helm-bibtex)
+     :desc "Search bibliography" :n "b" #'helm-bibtex
+     :desc "deft" :n "d" #'deft)
    ))
 
 (after! haskell-mode
