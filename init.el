@@ -69,37 +69,16 @@
        nix               ; I hereby declare "nix geht mehr!"
        (org +attach +babel +capture +export +present)
        rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
-       sh                ; she sells (ba|z)sh shells on the C xor
+       (sh +fish)
        web               ; the tubes
        ;; my langs:
        coq
        idris
        agda
 
-       ;; Applications are complex and opinionated modules that transform Emacs
-       ;; toward a specific purpose. They may have additional dependencies and
-       ;; should be loaded late.
        :app
-      ;(email +gmail)    ; emacs as an email client
-      ;irc               ; how neckbeards socialize
-      ;(rss +org)        ; emacs as an RSS reader
-      ;twitter           ; twitter client https://twitter.com/vnought
-      ;(write            ; emacs as a word processor (latex + org + markdown)
-      ; +wordnut         ; wordnet (wn) search
-      ; +langtool)       ; a proofreader (grammar/style check) for Emacs
-
-       :collab
-      ;floobits          ; peer programming for a price
-      ;impatient-mode    ; show off code over HTTP
+       ;; (email +gmail)
+       (rss +org)
 
        :config
-       ;; For literate config users. This will tangle+compile a config.org
-       ;; literate config in your `doom-private-dir' whenever it changes.
-       ;literate
-
-       ;; The default module set reasonable defaults for Emacs. It also provides
-       ;; a Spacemacs-inspired keybinding scheme, a custom yasnippet library,
-       ;; and additional ex commands for evil-mode. Use it as a reference for
-       ;; your own modules.
        (default +bindings +snippets +evil-commands))
-

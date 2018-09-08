@@ -34,3 +34,5 @@ Maybe file templates are messing with this?
 
 * Misc
 ** TODO make unicode fallback font work without hacks
+* eshell
+** TODO improve eshell completion, maybe using ~esh-autosuggest~
