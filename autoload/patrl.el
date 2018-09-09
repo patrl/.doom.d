@@ -2,10 +2,11 @@
 
 ;;;###autoload
 (defun +patrl/tangle-dotfiles ()
-  (when (equal (buffer-file-name)
-               (expand-file-name "~/nixos-config/README.org"))
+  "If the current file is in '~/.dots', the code blocks are tangled"
+  (when (equal (file-name-directory (directory-file-name buffer-file-name))
+               (concat (getenv "HOME") "/.dots/"))
     (org-babel-tangle)
-    (message "Dotfiles tangled")))
+    (message "%s tangled" buffer-file-name)))
 
 ;;;###autoload
 (add-hook 'after-save-hook #'+patrl/tangle-dotfiles)
