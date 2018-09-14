@@ -92,4 +92,4 @@
 ;; (setq counsel-linux-apps-directories '("/var/run/current-system/sw/share/applications"))
 
 ;; avoid incompatibilities between tramp and zsh
-(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
+;; (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
