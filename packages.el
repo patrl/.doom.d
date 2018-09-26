@@ -6,3 +6,5 @@
 (package! deadgrep)
 
 (package! olivetti)
+
+(package! org-brain)
