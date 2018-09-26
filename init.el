@@ -12,8 +12,8 @@
 
        :completion
        (company +auto +tng +childframe)
-       (helm +childrame +fuzzy)
-       ;; (ivy +childframe +fuzzy)
+       ;; (helm +childrame +fuzzy)
+       (ivy +childframe +fuzzy)
 
        :ui
        doom
@@ -57,6 +57,7 @@
        ;; my tools:
        org-noter
        ebib
+       lsp
 
        :lang
        common-lisp       ; if you've seen one lisp, you've seen them all
