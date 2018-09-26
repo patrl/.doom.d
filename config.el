@@ -35,13 +35,17 @@
 ;; ensures that unicode symbol completion only happens in math-mode
 (after! latex
   (add-hook! 'LaTeX-mode-hook
-      (setq-local company-math-allow-unicode-symbols-in-faces (quote (tex-math font-latex-math-face)))
-      (setq-local company-math-disallow-unicode-symbols-in-faces nil)))
+    (setq-local company-math-allow-unicode-symbols-in-faces (quote (tex-math font-latex-math-face)))
+    (setq-local company-math-disallow-unicode-symbols-in-faces nil))
 
-(setq doom-font (font-spec :family "Input Mono" :size 11.0)
+  ;; quotations automatically expand to csquote macro
+  (setq LaTeX-csquotes-close-quote "}"
+        LaTeX-csquotes-open-quote "\\enquote{"))
+
+(setq doom-font (font-spec :family "Input Mono" :size 11.0) ;; used to be Input size 11.0
       doom-variable-pitch-font (font-spec :family "Input Sans")
       doom-unicode-font (font-spec :name "DejaVu Sans Mono")
-      doom-big-font (font-spec :family "Input Mono" :size 18.0)
+      doom-big-font (font-spec :family "Dank Mono" :size 18.0)
       doom-theme 'doom-dracula)
 
 ;; refactoring support in haskell mode
@@ -93,3 +97,17 @@
 
 ;; avoid incompatibilities between tramp and zsh
 ;; (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
+
+(def-package! org-brain
+  :init
+  (setq org-brain-path "/home/patrl/Sync/org/brain")
+  (with-eval-after-load 'evil
+    (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
+  :config
+  ;; (setq org-id-track-globally t
+  ;; org-id-locations-file "~/.emacs.d/.org-id-locations")
+  (push '("b" "Brain" plain (function org-brain-goto-end)
+          "* %i%?" :empty-lines 1)
+        org-capture-templates)
+  (setq org-brain-visualize-default-choices 'all)
+  (setq org-brain-title-max-length 12))
