@@ -1,4 +1,16 @@
 ;;; ~/.doom.d/+bindings.el -*- lexical-binding: t; -*-
+;;;
+(map!
+ ;; Easier window navigation
+ :n "C-h"   #'evil-window-left
+ :n "C-j"   #'evil-window-down
+ :n "C-k"   #'evil-window-up
+ :n "C-l"   #'evil-window-right
+
+ (:after treemacs-evil
+   (:map evil-treemacs-state-map
+     "C-h" #'evil-window-left
+     "C-l" #'evil-window-right))
 
 (map!
  (:leader
@@ -8,8 +20,7 @@
    (:desc "notes" :prefix "n"
      :desc "Search bibliography" :n "b" #'ivy-bibtex
      :desc "deft" :n "d" #'deft
-     :desc "brain" :n "D" #'+patrl/deft-brain)
-   ))
+     :desc "visualize brain" :n "m" #'org-brain-visualize)))
 
 (after! haskell-mode
   (map! :map haskell-mode-map

@@ -9,6 +9,4 @@
 
 (package! org-brain)
 
-(package! org-cliplink)
-
 (package! ascii-art-to-unicode)

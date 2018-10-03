@@ -1,19 +1,21 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
-;;;
+
+(load! "+bindings.el") ;; load my custom bindings
 
 (setq user-full-name "Patrick D. Elliott"
       user-mail-address "patrick.d.elliott@gmail.com")
 
-(def-package! agda-input) ;; enable the agda input method globally
+(def-package! agda-input) ;; enable the agda input method globally. Depends on the agda module.
 
-(load! "+bindings.el")
-
+;; org tweaks
 (setq org-directory (expand-file-name "~/Sync/org/")
       org-agenda-files (list org-directory)
       org-ellipsis " ▼ "
       org-highlight-latex-and-related '(latex)
       org-bullets-bullet-list '("#"))
 
+;; deft tweaks for brain compatibility
+;; TODO modify the summary rule for brain
 (after! deft
   ;; (setq deft-directory "~/Sync/deft")
   (setq deft-directory org-brain-path
@@ -43,10 +45,6 @@
     (setq-local company-math-allow-unicode-symbols-in-faces (quote (tex-math font-latex-math-face)))
     (setq-local company-math-disallow-unicode-symbols-in-faces nil))
 
-  ;; quotations automatically expand to csquote macro
-  (setq LaTeX-csquotes-close-quote "}"
-        LaTeX-csquotes-open-quote "\\enquote{"))
-
 (setq doom-font (font-spec :family "IBM Plex Mono" :size 11.0)
       ;; doom-font (font-spec :family "Input Mono" :size 11.0)
       doom-variable-pitch-font (font-spec :family "IBM Plex Sans")
@@ -64,11 +62,6 @@
 
 ;; eshell aliases
 (after! eshell
-  ;; use ivy for eshell completion
-  ;; (add-hook 'eshell-mode-hook
-  ;;           (lambda ()
-  ;;             (define-key eshell-mode-map (kbd "<tab>")
-  ;;               (lambda () (interactive) (pcomplete-std-complete)))))
   (set-eshell-alias!
    "f"   "find-file $1"
    "l"   "ls -lh"
@@ -82,9 +75,6 @@
 (setq +magit-hub-features t
       magit-process-find-password-functions '(magit-process-password-auth-source)
       magithub-clone-default-directory "~/GitHub/")
-
-;; disable line numbers in text and derived modes.
-;; this doesn't seem to be working
 
 (after! markdown-mode
   ;; export markdown to beautiful html via pandoc
