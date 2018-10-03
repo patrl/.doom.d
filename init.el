@@ -4,7 +4,7 @@
        eval
        (evil +everywhere)
        file-templates
-       (lookup +devdocs)
+       (lookup +docsets)
        snippets
        spellcheck
        (syntax-checker +childframe)
@@ -18,7 +18,7 @@
        :ui
        doom
        doom-dashboard
-       doom-quit
+       ;; doom-quit
        evil-goggles
        hl-todo
        modeline
@@ -33,8 +33,8 @@
        :editor
        format
        multiple-cursors
-       parinfer
-       ;; rotate-text
+       ;; parinfer
+       rotate-text
 
        :emacs
        dired
