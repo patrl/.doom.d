@@ -1,7 +1,10 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
+;;;
 
 (setq user-full-name "Patrick D. Elliott"
       user-mail-address "patrick.d.elliott@gmail.com")
+
+(def-package! agda-input) ;; enable the agda input method globally
 
 (load! "+bindings.el")
 
@@ -12,25 +15,27 @@
       org-bullets-bullet-list '("#"))
 
 (after! deft
-  (setq deft-directory "~/Sync/deft"))
+  ;; (setq deft-directory "~/Sync/deft")
+  (setq deft-directory org-brain-path
+        deft-recursive t
+        deft-use-filename-as-title t
+        deft-extensions '("org")))
 
 ;; nix tweaks
 (after! nix-mode
+  ;; use experiment nix indent function
   (setq nix-indent-function 'nix-indent-line))
 
-(setq bibtex-completion-library-path "~/Sync/library/"
-      helm-bibtex-full-frame nil
-      bibtex-completion-pdf-symbol ""
+(setq bibtex-completion-library-path "~/Sync/library/" ;; path to my pdf library
+      bibtex-completion-pdf-symbol "" ;; custom icon to indicate that a pdf is available
       +latex-bibtex-file "~/GitHub/bibliography/elliott_mybib.bib"
+      ivy-bibtex-default-action 'ivy-bibtex-open-pdf
       +latex-viewers `(pdf-tools zathura))
 
-;; (setq ivy-bibtex-default-action 'ivy-bibtex-open-pdf)
-
 (after! tex
-  (setq-default TeX-engine 'xetex))
+  (setq-default TeX-engine 'xetex)) ;; set the default engine to xetex
 
-;; enable unicode-math completion:
-(setq +latex-enable-unicode-math t)
+(setq +latex-enable-unicode-math t) ;; enable unicode-math completion:
 
 ;; ensures that unicode symbol completion only happens in math-mode
 (after! latex
@@ -42,11 +47,13 @@
   (setq LaTeX-csquotes-close-quote "}"
         LaTeX-csquotes-open-quote "\\enquote{"))
 
-(setq doom-font (font-spec :family "Input Mono" :size 11.0) ;; used to be Input size 11.0
-      doom-variable-pitch-font (font-spec :family "Input Sans")
+(setq doom-font (font-spec :family "IBM Plex Mono" :size 11.0)
+      ;; doom-font (font-spec :family "Input Mono" :size 11.0)
+      doom-variable-pitch-font (font-spec :family "IBM Plex Sans")
+      ;; doom-variable-pitch-font (font-spec :family "Input Sans")
       doom-unicode-font (font-spec :name "DejaVu Sans Mono")
-      doom-big-font (font-spec :family "Dank Mono" :size 18.0)
-      doom-theme 'doom-dracula)
+      doom-big-font (font-spec :family "IBM Plex Mono" :size 18.0)
+      doom-theme 'doom-one-light)
 
 ;; refactoring support in haskell mode
 (def-package! hlint-refactor
@@ -57,6 +64,11 @@
 
 ;; eshell aliases
 (after! eshell
+  ;; use ivy for eshell completion
+  ;; (add-hook 'eshell-mode-hook
+  ;;           (lambda ()
+  ;;             (define-key eshell-mode-map (kbd "<tab>")
+  ;;               (lambda () (interactive) (pcomplete-std-complete)))))
   (set-eshell-alias!
    "f"   "find-file $1"
    "l"   "ls -lh"
@@ -71,21 +83,14 @@
       magit-process-find-password-functions '(magit-process-password-auth-source)
       magithub-clone-default-directory "~/GitHub/")
 
-;; (after! magit
-  ;; Add gpg-sign to rebasing by default (stolen from Henrik)
-  ;; (magit-define-popup-option 'magit-rebase-popup
-    ;; ?S "Sign using gpg" "--gpg-sign=" #'magit-read-gpg-secret-key)
-
 ;; disable line numbers in text and derived modes.
-(add-hook 'text-mode-hook #'doom|disable-line-numbers)
+;; this doesn't seem to be working
 
 (after! markdown-mode
   ;; export markdown to beautiful html via pandoc
   (setq markdown-command "pandoc --filter pandoc-citeproc --standalone --css=http://benjam.info/pan-am/styling.css -V lang=en -V highlighting-css= --mathjax --from=markdown+smart --to=html5"
         ;; enable math highlighting
-        markdown-enable-math t)
-  ;; make markdown-mode less visually distracting:
-  (add-hook! markdown-mode '(visual-line-mode turn-on-olivetti-mode)))
+        markdown-enable-math t))
 
 ;; active dante-mode snippets in dante-mode (since it's a minor mode)
 (add-hook 'dante-mode-hook
@@ -93,7 +98,7 @@
               (yas-activate-extra-mode 'dante-mode)))
 
 ;; counsel-linux-app looks in the right place for applications
-;; (setq counsel-linux-apps-directories '("/var/run/current-system/sw/share/applications"))
+(setq counsel-linux-apps-directories '("/var/run/current-system/sw/share/applications"))
 
 ;; avoid incompatibilities between tramp and zsh
 ;; (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
@@ -105,9 +110,11 @@
     (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
   :config
   ;; (setq org-id-track-globally t
-  ;; org-id-locations-file "~/.emacs.d/.org-id-locations")
+  ;; org-id-locations-file "~/.doom.d/.org-id-locations")
   (push '("b" "Brain" plain (function org-brain-goto-end)
           "* %i%?" :empty-lines 1)
         org-capture-templates)
   (setq org-brain-visualize-default-choices 'all)
-  (setq org-brain-title-max-length 12))
+  (setq org-brain-title-max-length 12)
+  ;; my additions
+  (set-popup-rule! "*org-brain*" :ignore t))
