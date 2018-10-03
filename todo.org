@@ -1,38 +1,20 @@
 #+title: todo
 
-* coq
-** TODO only put the ~company~ features of ~company-coq~ behind a conditional 
 * agda
-
-** TODO add keybindings
-** TODO fix highlight faces (they look terrible in dark faces)
-* Haskell
-
-** TODO integrate ~hlint-refactor~ into ~attrap-attrap~
-** TODO write emacs package from ~brittany~
-
+** TODO fix syntax-highlighting upstream
 * Org
-
 ** TODO start org with truncated lines automatically
 This has something to do with the ~org-startup-truncated~ variable.
 * ebib
 ** TODO define evil-compatible bindings
-* eshell
-** TODO set-up config
-aliases etc.
-
-* Snippets
-
 * deft
-
 ** TODO get ~deft~ to auto-insert titles for new org-mode files
 Maybe file templates are messing with this?
 
 * Markdown
-
 ** TODO fontification for superscript and subscript
 
-* Misc
-** TODO make unicode fallback font work without hacks
 * eshell
 ** TODO improve eshell completion, maybe using ~esh-autosuggest~
+* org-brain
+** TODO manage `org-brain-visualize` buffer with `set-popup-rule!`

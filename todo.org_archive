@@ -103,3 +103,70 @@ Fixed in a subsequent commit.
 :END:
 This somehow went away by itself.
 
+
+* DONE make unicode fallback font work without hacks
+:PROPERTIES:
+:ARCHIVE_TIME: 2018-10-03 Wed 12:38
+:ARCHIVE_FILE: ~/.doom.d/todo.org
+:ARCHIVE_OLPATH: Misc
+:ARCHIVE_CATEGORY: todo
+:ARCHIVE_TODO: DONE
+:END:
+
+* DONE set-up config
+:PROPERTIES:
+:ARCHIVE_TIME: 2018-10-03 Wed 12:39
+:ARCHIVE_FILE: ~/.doom.d/todo.org
+:ARCHIVE_OLPATH: eshell
+:ARCHIVE_CATEGORY: todo
+:ARCHIVE_TODO: DONE
+:END:
+aliases etc.
+
+
+* DONE integrate ~hlint-refactor~ into ~attrap-attrap~
+:PROPERTIES:
+:ARCHIVE_TIME: 2018-10-03 Wed 12:39
+:ARCHIVE_FILE: ~/.doom.d/todo.org
+:ARCHIVE_OLPATH: Haskell
+:ARCHIVE_CATEGORY: todo
+:ARCHIVE_TODO: DONE
+:END:
+
+* CANCELLED write emacs package from ~brittany~
+:PROPERTIES:
+:ARCHIVE_TIME: 2018-10-03 Wed 12:40
+:ARCHIVE_FILE: ~/.doom.d/todo.org
+:ARCHIVE_OLPATH: Haskell
+:ARCHIVE_CATEGORY: todo
+:ARCHIVE_TODO: CANCELLED
+:END:
+
+This is unnecessary since ~brittany~ got integrated into [[https://github.com/lassik/emacs-format-all-the-code][format-all]].
+
+* DONE add keybindings
+:PROPERTIES:
+:ARCHIVE_TIME: 2018-10-03 Wed 12:40
+:ARCHIVE_FILE: ~/.doom.d/todo.org
+:ARCHIVE_OLPATH: agda
+:ARCHIVE_CATEGORY: todo
+:ARCHIVE_TODO: DONE
+:END:
+
+* DONE fix highlight faces (they look terrible in dark faces)
+:PROPERTIES:
+:ARCHIVE_TIME: 2018-10-03 Wed 12:40
+:ARCHIVE_FILE: ~/.doom.d/todo.org
+:ARCHIVE_OLPATH: agda
+:ARCHIVE_CATEGORY: todo
+:ARCHIVE_TODO: DONE
+:END:
+
+* DONE only put the ~company~ features of ~company-coq~ behind a conditional
+:PROPERTIES:
+:ARCHIVE_TIME: 2018-10-03 Wed 12:41
+:ARCHIVE_FILE: ~/.doom.d/todo.org
+:ARCHIVE_OLPATH: coq
+:ARCHIVE_CATEGORY: todo
+:ARCHIVE_TODO: DONE
+:END:
