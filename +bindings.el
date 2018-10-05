@@ -10,7 +10,7 @@
  (:after treemacs-evil
    (:map evil-treemacs-state-map
      "C-h" #'evil-window-left
-     "C-l" #'evil-window-right))
+     "C-l" #'evil-window-right)))
 
 (map!
  (:leader
