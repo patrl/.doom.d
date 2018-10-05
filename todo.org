@@ -17,4 +17,8 @@ Maybe file templates are messing with this?
 * eshell
 ** TODO improve eshell completion, maybe using ~esh-autosuggest~
 * org-brain
-** TODO manage `org-brain-visualize` buffer with `set-popup-rule!`
+** TODO manage ~org-brain-visualize~ buffer with ~set-popup-rule!~
+* write
+** TODO disable ~hl-line-mode~ when ~+write-mode~ is active
+** TODO figure out top padding in ~+write-mode~
+** TODO only variable pitch font gets scaled in ~+write-mode~. Looks terrible
