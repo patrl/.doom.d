@@ -11,7 +11,7 @@
        workspaces
 
        :completion
-       (company +auto +tng +childframe)
+       (company +tng +childframe)
        ;; (helm +childrame +fuzzy)
        (ivy +childframe +fuzzy)
 
@@ -80,6 +80,7 @@
        :app
        ;; (email +gmail)
        (rss +org)
+       write
 
        :config
        (default +bindings +snippets +evil-commands))
