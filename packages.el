@@ -5,8 +5,6 @@
 
 (package! deadgrep)
 
-(package! writeroom-mode)
-
 (package! org-brain)
 
 (package! ascii-art-to-unicode)
