@@ -7,6 +7,8 @@
 
 (def-package! agda-input) ;; enable the agda input method globally. Depends on the agda module.
 
+(setq +write-line-spacing 0.1)
+
 ;; org tweaks
 (setq org-directory (expand-file-name "~/Sync/org/")
       org-agenda-files (list org-directory)
@@ -43,11 +45,11 @@
 (after! latex
   (add-hook! 'LaTeX-mode-hook
     (setq-local company-math-allow-unicode-symbols-in-faces (quote (tex-math font-latex-math-face)))
-    (setq-local company-math-disallow-unicode-symbols-in-faces nil))
+    (setq-local company-math-disallow-unicode-symbols-in-faces nil)))
 
 (setq doom-font (font-spec :family "IBM Plex Mono" :size 11.0)
       ;; doom-font (font-spec :family "Input Mono" :size 11.0)
-      doom-variable-pitch-font (font-spec :family "IBM Plex Sans")
+      doom-variable-pitch-font (font-spec :family "iA Writer Duospace")
       ;; doom-variable-pitch-font (font-spec :family "Input Sans")
       doom-unicode-font (font-spec :name "DejaVu Sans Mono")
       doom-big-font (font-spec :family "IBM Plex Mono" :size 18.0)
@@ -104,7 +106,7 @@
   (push '("b" "Brain" plain (function org-brain-goto-end)
           "* %i%?" :empty-lines 1)
         org-capture-templates)
-  (setq org-brain-visualize-default-choices 'all)
-  (setq org-brain-title-max-length 12)
+  (setq org-brain-visualize-default-choices 'files)
+  (setq org-brain-title-max-length 24)
   ;; my additions
   (set-popup-rule! "*org-brain*" :ignore t))
