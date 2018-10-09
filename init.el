@@ -78,6 +78,7 @@
        agda
 
        :app
+       mu4e
        ;; (email +gmail)
        (rss +org)
        write
