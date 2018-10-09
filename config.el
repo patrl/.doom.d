@@ -7,6 +7,10 @@
 
 (def-package! agda-input) ;; enable the agda input method globally. Depends on the agda module.
 
+;; for auth source debugging
+;; (setq auth-source-do-cache nil
+      ;; auth-source-debug t)
+
 (setq +write-line-spacing 0.1)
 
 ;; org tweaks
@@ -98,9 +102,11 @@
 (def-package! org-brain
   :init
   (setq org-brain-path "/home/patrl/Sync/org/brain")
-  (with-eval-after-load 'evil
-    (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
+  (add-to-list 'evil-motion-state-modes 'org-brain-visualize-mode)
+  ;; (with-eval-after-load 'evil
+  ;;   (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
   :config
+  (add-hook 'org-brain-visualize-mode-hook 'visual-line-mode)
   ;; (setq org-id-track-globally t
   ;; org-id-locations-file "~/.doom.d/.org-id-locations")
   (push '("b" "Brain" plain (function org-brain-goto-end)
