@@ -22,3 +22,5 @@ Maybe file templates are messing with this?
 ** TODO disable ~hl-line-mode~ when ~+write-mode~ is active
 ** TODO figure out top padding in ~+write-mode~
 ** TODO only variable pitch font gets scaled in ~+write-mode~. Looks terrible
+* Plugins to investigate
+** TODO [[https://github.com/noctuid/lispyville][lispyville]]
