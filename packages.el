@@ -8,3 +8,5 @@
 (package! org-brain)
 
 (package! ascii-art-to-unicode)
+
+(package! org-pdfview)
