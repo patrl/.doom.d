@@ -10,3 +10,5 @@
 (package! ascii-art-to-unicode)
 
 (package! org-pdfview)
+
+(package! org-cliplink)
