@@ -2,6 +2,8 @@
 
 * agda
 ** TODO fix syntax-highlighting upstream
+* make
+** TODO figure out a nice way to treat compilation popups
 * Org
 ** TODO start org with truncated lines automatically
 This has something to do with the ~org-startup-truncated~ variable.
@@ -24,3 +26,5 @@ Maybe file templates are messing with this?
 ** TODO only variable pitch font gets scaled in ~+write-mode~. Looks terrible
 * Plugins to investigate
 ** TODO [[https://github.com/noctuid/lispyville][lispyville]]
+** TODO [[https://github.com/larstvei/Focus][focus-mode]]
+** TODO [[github:rexim/org-cliplink][org-cliplink]]
