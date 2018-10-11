@@ -99,6 +99,7 @@
 ;; avoid incompatibilities between tramp and zsh
 ;; (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 
+;; TODO remove once my PR is accepted: https://github.com/hlissner/doom-emacs/pull/944
 (def-package! org-brain
   :init
   (setq org-brain-path "/home/patrl/Sync/org/brain")
@@ -117,8 +118,14 @@
   ;; my additions
   (set-popup-rule! "*org-brain*" :ignore t))
 
+(set-popup-rule! "*compilation*" :size 15 :ttl nil :quit t)
+
+;; TODO remove once my PR is accepted: https://github.com/hlissner/doom-emacs/pull/948
 (def-package! org-pdfview
   :config
   (delete '("\\.pdf\\'" . default) org-file-apps)
   (add-to-list 'org-file-apps '("\\.pdf\\'" . (lambda (file link) (org-pdfview-open link))))
   (add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" . (lambda (file link) (org-pdfview-open link)))))
+
+(def-package! org-cliplink
+  :commands org-cliplink)
