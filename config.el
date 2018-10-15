@@ -1,5 +1,17 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
+;;;;;;;;;;;;;
+;; general ;;
+;;;;;;;;;;;;;
+
+(setq doom-font (font-spec :family "IBM Plex Mono" :size 11.0)
+      ;; doom-font (font-spec :family "Input Mono" :size 11.0)
+      doom-variable-pitch-font (font-spec :family "iA Writer Duospace")
+      ;; doom-variable-pitch-font (font-spec :family "Input Sans")
+      doom-unicode-font (font-spec :name "DejaVu Sans Mono")
+      doom-big-font (font-spec :family "IBM Plex Mono" :size 18.0)
+      doom-theme 'doom-one-light)
+
 (load! "+bindings.el") ;; load my custom bindings
 
 (setq user-full-name "Patrick D. Elliott"
@@ -7,11 +19,19 @@
 
 (def-package! agda-input) ;; enable the agda input method globally. Depends on the agda module.
 
-;; for auth source debugging
-;; (setq auth-source-do-cache nil
-      ;; auth-source-debug t)
-
 (setq +write-line-spacing 0.1)
+
+;; counsel-linux-app looks in the right place for applications
+(setq counsel-linux-apps-directories '("/var/run/current-system/sw/share/applications"))
+
+(set-popup-rule! "*compilation*" :size 15 :ttl nil :quit t)
+
+;;;;;;;;;;;;;;
+;; org-mode ;;
+;;;;;;;;;;;;;;
+
+(def-package! org-cliplink
+  :commands org-cliplink)
 
 ;; org tweaks
 (setq org-directory (expand-file-name "~/Sync/org/")
@@ -19,6 +39,23 @@
       org-ellipsis " ▼ "
       org-highlight-latex-and-related '(latex)
       org-bullets-bullet-list '("#"))
+
+;; TODO remove once my PR is accepted: https://github.com/hlissner/doom-emacs/pull/944
+(def-package! org-brain
+  :init
+  (setq org-brain-path "/home/patrl/Sync/org/brain")
+  (add-to-list 'evil-motion-state-modes 'org-brain-visualize-mode)
+  ;; (with-eval-after-load 'evil
+  ;;   (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
+  :config
+  (add-hook 'org-brain-visualize-mode-hook 'visual-line-mode)
+  (push '("b" "Brain" plain (function org-brain-goto-end)
+          "* %i%?" :empty-lines 1)
+        org-capture-templates)
+  (setq org-brain-visualize-default-choices 'files)
+  (setq org-brain-title-max-length 24)
+  ;; my additions
+  (set-popup-rule! "*org-brain*" :ignore t))
 
 ;; deft tweaks for brain compatibility
 ;; TODO modify the summary rule for brain
@@ -29,10 +66,18 @@
         deft-use-filename-as-title t
         deft-extensions '("org")))
 
+;;;;;;;;;
+;; nix ;;
+;;;;;;;;;
+
 ;; nix tweaks
 (after! nix-mode
   ;; use experiment nix indent function
   (setq nix-indent-function 'nix-indent-line))
+
+;;;;;;;;;
+;; tex ;;
+;;;;;;;;;
 
 (setq bibtex-completion-library-path "~/Sync/library/" ;; path to my pdf library
       bibtex-completion-pdf-symbol "" ;; custom icon to indicate that a pdf is available
@@ -51,13 +96,9 @@
     (setq-local company-math-allow-unicode-symbols-in-faces (quote (tex-math font-latex-math-face)))
     (setq-local company-math-disallow-unicode-symbols-in-faces nil)))
 
-(setq doom-font (font-spec :family "IBM Plex Mono" :size 11.0)
-      ;; doom-font (font-spec :family "Input Mono" :size 11.0)
-      doom-variable-pitch-font (font-spec :family "iA Writer Duospace")
-      ;; doom-variable-pitch-font (font-spec :family "Input Sans")
-      doom-unicode-font (font-spec :name "DejaVu Sans Mono")
-      doom-big-font (font-spec :family "IBM Plex Mono" :size 18.0)
-      doom-theme 'doom-one-light)
+;;;;;;;;;;;;;
+;; haskell ;;
+;;;;;;;;;;;;;
 
 ;; refactoring support in haskell mode
 (def-package! hlint-refactor
@@ -65,6 +106,15 @@
 
 ;; handy keybinding for deadgrep
 (global-set-key (kbd "<f5>") #'deadgrep)
+
+;; active dante-mode snippets in dante-mode (since it's a minor mode)
+(add-hook 'dante-mode-hook
+          #'(lambda ()
+              (yas-activate-extra-mode 'dante-mode)))
+
+;;;;;;;;;;;;
+;; eshell ;;
+;;;;;;;;;;;;
 
 ;; eshell aliases
 (after! eshell
@@ -77,10 +127,18 @@
    "gc"  "magit-commit"
    "rg"  "rg --color=always $*"))
 
+;;;;;;;;;
+;; git ;;
+;;;;;;;;;
+
 ;; batteries-included magit setup:
 (setq +magit-hub-features t
       magit-process-find-password-functions '(magit-process-password-auth-source)
       magithub-clone-default-directory "~/GitHub/")
+
+;;;;;;;;;;;;;;
+;; markdown ;;
+;;;;;;;;;;;;;;
 
 (after! markdown-mode
   ;; export markdown to beautiful html via pandoc
@@ -88,44 +146,13 @@
         ;; enable math highlighting
         markdown-enable-math t))
 
-;; active dante-mode snippets in dante-mode (since it's a minor mode)
-(add-hook 'dante-mode-hook
-          #'(lambda ()
-              (yas-activate-extra-mode 'dante-mode)))
+;;;;;;;;;;;;;;;
+;; debugging ;;
+;;;;;;;;;;;;;;;
 
-;; counsel-linux-app looks in the right place for applications
-(setq counsel-linux-apps-directories '("/var/run/current-system/sw/share/applications"))
+;; for auth source debugging
+;; (setq auth-source-do-cache nil
+;; auth-source-debug t)
 
 ;; avoid incompatibilities between tramp and zsh
 ;; (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
-
-;; TODO remove once my PR is accepted: https://github.com/hlissner/doom-emacs/pull/944
-(def-package! org-brain
-  :init
-  (setq org-brain-path "/home/patrl/Sync/org/brain")
-  (add-to-list 'evil-motion-state-modes 'org-brain-visualize-mode)
-  ;; (with-eval-after-load 'evil
-  ;;   (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
-  :config
-  (add-hook 'org-brain-visualize-mode-hook 'visual-line-mode)
-  ;; (setq org-id-track-globally t
-  ;; org-id-locations-file "~/.doom.d/.org-id-locations")
-  (push '("b" "Brain" plain (function org-brain-goto-end)
-          "* %i%?" :empty-lines 1)
-        org-capture-templates)
-  (setq org-brain-visualize-default-choices 'files)
-  (setq org-brain-title-max-length 24)
-  ;; my additions
-  (set-popup-rule! "*org-brain*" :ignore t))
-
-(set-popup-rule! "*compilation*" :size 15 :ttl nil :quit t)
-
-;; TODO remove once my PR is accepted: https://github.com/hlissner/doom-emacs/pull/948
-(def-package! org-pdfview
-  :config
-  (delete '("\\.pdf\\'" . default) org-file-apps)
-  (add-to-list 'org-file-apps '("\\.pdf\\'" . (lambda (file link) (org-pdfview-open link))))
-  (add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" . (lambda (file link) (org-pdfview-open link)))))
-
-(def-package! org-cliplink
-  :commands org-cliplink)
