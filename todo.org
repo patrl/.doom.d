@@ -24,6 +24,11 @@ Maybe file templates are messing with this?
 ** TODO disable ~hl-line-mode~ when ~+write-mode~ is active
 ** TODO figure out top padding in ~+write-mode~
 ** TODO only variable pitch font gets scaled in ~+write-mode~. Looks terrible
+* haskell
+** TODO configure nix-shell hoogle to work with haskell-mode
+** TODO fix literate haskell mode
+For some reasoning opening a literate haskell file (~.lhs~), results in a
+massive hang.
 * Plugins to investigate
 ** TODO [[https://github.com/noctuid/lispyville][lispyville]]
 ** TODO [[https://github.com/larstvei/Focus][focus-mode]]

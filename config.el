@@ -10,7 +10,7 @@
       ;; doom-variable-pitch-font (font-spec :family "Input Sans")
       doom-unicode-font (font-spec :name "DejaVu Sans Mono")
       doom-big-font (font-spec :family "IBM Plex Mono" :size 18.0)
-      doom-theme 'doom-one-light)
+      doom-theme 'doom-dracula)
 
 (load! "+bindings.el") ;; load my custom bindings
 
@@ -24,7 +24,7 @@
 ;; counsel-linux-app looks in the right place for applications
 (setq counsel-linux-apps-directories '("/var/run/current-system/sw/share/applications"))
 
-(set-popup-rule! "*compilation*" :size 15 :ttl nil :quit t)
+(set-popup-rule! "\*compilation\*" :ttl nil)
 
 ;;;;;;;;;;;;;;
 ;; org-mode ;;
@@ -62,7 +62,7 @@
 (after! deft
   ;; (setq deft-directory "~/Sync/deft")
   (setq deft-directory org-brain-path
-        deft-recursive t
+        ;; deft-recursive t
         deft-use-filename-as-title t
         deft-extensions '("org")))
 
@@ -83,7 +83,7 @@
       bibtex-completion-pdf-symbol "" ;; custom icon to indicate that a pdf is available
       +latex-bibtex-file "~/GitHub/bibliography/elliott_mybib.bib"
       ivy-bibtex-default-action 'ivy-bibtex-open-pdf
-      +latex-viewers `(pdf-tools zathura))
+      +latex-viewers `(zathura pdf-tools))
 
 (after! tex
   (setq-default TeX-engine 'xetex)) ;; set the default engine to xetex
@@ -101,8 +101,8 @@
 ;;;;;;;;;;;;;
 
 ;; refactoring support in haskell mode
-(def-package! hlint-refactor
-  :hook (haskell-mode . hlint-refactor-mode))
+;; (def-package! hlint-refactor
+;;  :hook (haskell-mode . hlint-refactor-mode))
 
 ;; handy keybinding for deadgrep
 (global-set-key (kbd "<f5>") #'deadgrep)
@@ -111,6 +111,8 @@
 (add-hook 'dante-mode-hook
           #'(lambda ()
               (yas-activate-extra-mode 'dante-mode)))
+
+(setq dante-methods '(styx impure-nix nix new-build nix-ghci stack mafia bare-cabal bare-ghci))
 
 ;;;;;;;;;;;;
 ;; eshell ;;

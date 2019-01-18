@@ -13,7 +13,7 @@
        :completion
        (company +tng +childframe)
        ;; (helm +childrame +fuzzy)
-       (ivy +childframe +fuzzy)
+       (ivy +fuzzy)
 
        :ui
        doom
@@ -37,7 +37,7 @@
        rotate-text
 
        :emacs
-       dired
+       (dired +ranger)
        ediff
        electric
        eshell
@@ -64,6 +64,7 @@
        clojure           ; java with a lisp
        data              ; config/data formats
        emacs-lisp        ; drown in parentheses
+       javascript
        (haskell +dante)  ; a language that's lazier than I am
        (latex +latexmk +pdf-tools +unicode-math)
        (markdown +pandoc)
@@ -76,6 +77,7 @@
        coq
        idris
        agda
+       scheme
 
        :app
        mu4e
@@ -84,4 +86,4 @@
        write
 
        :config
-       (default +bindings +snippets +evil-commands))
+       (default +bindings +snippets))
