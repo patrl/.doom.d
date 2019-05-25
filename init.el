@@ -1,63 +1,66 @@
 ;;; ~/.doom.d/init.el -*- lexical-binding: t; -*-
 
-(doom! :feature
-       eval
-       (evil +everywhere)
-       file-templates
-       (lookup +docsets)
-       snippets
-       spellcheck
-       (syntax-checker +childframe)
-       workspaces
-
-       :completion
-       (company +tng +childframe)
+(doom! :completion
+       company
        ;; (helm +childrame +fuzzy)
-       (ivy +fuzzy)
+       (ivy +childframe +fuzzy)
 
        :ui
        doom
        doom-dashboard
        ;; doom-quit
-       evil-goggles
+       ophints
+       ;; fci
        hl-todo
        modeline
        nav-flash
+       ;; neotree
        treemacs
        (popup +all +defaults)
+       ;; pretty-code
+       ;; unicode
+       ;; tabbar
        vi-tilde-fringe
        window-select
        vc-gutter
+       workspaces
        deft
 
        :editor
+       (evil +everywhere)
+       file-templates
+       fold
        format
+       ;; lispy
        multiple-cursors
        ;; parinfer
        rotate-text
+       snippets
 
        :emacs
        (dired +ranger)
-       ediff
        electric
-       eshell
-       hideshow
-       imenu
-       ;; term
        vc
+
+       :term
+       eshell
 
        :tools
        ;; editorconfig
        ;; ein
+       eval
+       (flycheck +childframe)
+       flyspell
        gist
+       lookup
        make
        magit
-       (password-store +auth)
+       ;; (password-store +auth)
+       (pass +auth)
        pdf
        ;; my tools:
        org-noter
        ebib
-       lsp
 
        :lang
        common-lisp       ; if you've seen one lisp, you've seen them all
