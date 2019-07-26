@@ -14,17 +14,20 @@
 
 (set-popup-rule! "\*compilation\*" :ttl nil)
 
+(def-package! direnv
+  :config (direnv-mode))
+
 ;;;;;;;;;;;;;;;;
 ;; appearance ;;
 ;;;;;;;;;;;;;;;;
 
-(setq ;; doom-font (font-spec :family "IBM Plex Mono" :size 11.0)
-      doom-font (font-spec :family "Input Mono" :size 11.0)
-      ;; doom-variable-pitch-font (font-spec :family "iA Writer Duospace") ;; this works great
+(setq doom-font (font-spec :family "IBM Plex Mono" :size 11.0)
+      ;; doom-font (font-spec :family "Input Mono" :size 11.0)
+      doom-variable-pitch-font (font-spec :family "iA Writer Duospace") ;; this works great
       +write-line-spacing 0.1
-      doom-variable-pitch-font (font-spec :family "Input Sans")
+      ;; doom-variable-pitch-font (font-spec :family "Input Sans")
       doom-unicode-font (font-spec :name "DejaVu Sans Mono")
-      ;; doom-big-font (font-spec :family "IBM Plex Mono" :size 18.0)
+      doom-big-font (font-spec :family "IBM Plex Mono" :size 18.0)
       doom-theme 'doom-one-light)
       ;; doom-theme 'doom-dracula)
 
@@ -41,7 +44,7 @@
   :commands org-cliplink)
 
 ;; org tweaks
-(setq org-directory (expand-file-name "~/org/")
+(setq org-directory (expand-file-name "~/annex/org/")
       org-agenda-files (list org-directory)
       org-ellipsis " ▼ "
       org-highlight-latex-and-related '(latex) ;; highlight latex fragments
@@ -52,7 +55,7 @@
 ;; TODO remove once my PR is accepted: https://github.com/hlissner/doom-emacs/pull/944
 (def-package! org-brain
   :init
-  (setq org-brain-path "~/org/brain")
+  (setq org-brain-path "~/annex/org/brain")
   (add-to-list 'evil-motion-state-modes 'org-brain-visualize-mode)
   ;; (with-eval-after-load 'evil
   ;;   (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
@@ -68,7 +71,7 @@
 
 (setq org-publish-project-alist '(("org-brain"
                                    ;; dir for source files in org format
-                                   :base-directory "~/org/brain"
+                                   :base-directory "~/annex/org/brain"
                                    :base-extension "org"
                                    :exclude "maths.org\\|coding.org\\|index.org"
                                    ;; html dir
@@ -114,7 +117,7 @@
 
 
 (after! deft
-  (setq deft-directory "~/gdrive/deft"
+  (setq deft-directory "~/annex/deft"
         deft-extensions '("org" "md" "tex")
         deft-use-filter-string-for-filename t
         deft-org-mode-title-prefix t))
@@ -132,10 +135,10 @@
 ;; tex ;;
 ;;;;;;;;;
 
-(setq bibtex-completion-library-path "~/gdrive/library/" ;; path to my pdf library
-      bibtex-completion-bibliography "~/GitHub/bibliography/elliott_mybib.bib"
+(setq bibtex-completion-library-path "~/annex/library/" ;; path to my pdf library
+      bibtex-completion-bibliography "~/repos/bibliography/elliott_mybib.bib"
       bibtex-completion-pdf-symbol "" ;; custom icon to indicate that a pdf is available
-      +latex-bibtex-file "~/GitHub/bibliography/elliott_mybib.bib"
+      +latex-bibtex-file "~/repos/bibliography/elliott_mybib.bib"
       ivy-bibtex-default-action 'ivy-bibtex-open-pdf
       ;; bibtex-completion-pdf-open-function  (lambda (fpath) (call-process "zathura" nil 0 nil fpath))
       ;; +latex-viewers `(zathura pdf-tools)
@@ -165,7 +168,7 @@
 (setq dante-tap-type-time 0.5)
 
 ;; ensures that impure-nix is tried before nix.
-(setq dante-methods '(styx impure-nix nix new-build nix-ghci stack mafia bare-cabal bare-ghci))
+(setq dante-methods '(new-build bare-ghci))
 
 ;;;;;;;;;;;;
 ;; eshell ;;
@@ -189,7 +192,7 @@
 ;; batteries-included magit setup:
 (setq +magit-hub-features t
       magit-process-find-password-functions '(magit-process-password-auth-source)
-      magithub-clone-default-directory "~/GitHub/")
+      magithub-clone-default-directory "~/repos/")
 
 ;;;;;;;;;;;;;;
 ;; markdown ;;
@@ -200,6 +203,12 @@
   (setq markdown-command "pandoc --filter pandoc-citeproc --standalone --css=http://benjam.info/pan-am/styling.css -V lang=en -V highlighting-css= --mathjax --from=markdown+smart --to=html5"
         ;; enable math highlighting
         markdown-enable-math t))
+
+
+(def-package! pandoc-mode
+  :hook markdown-mode
+  :config
+  (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings))
 
 ;;;;;;;;;;;;;;;
 ;; debugging ;;

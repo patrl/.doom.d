@@ -72,7 +72,7 @@
        (latex +latexmk +pdf-tools +unicode-math)
        (markdown +pandoc)
        nix               ; I hereby declare "nix geht mehr!"
-       (org +attach +babel +capture +export +present)
+       (org +pandoc)
        rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        (sh +fish)
        web               ; the tubes

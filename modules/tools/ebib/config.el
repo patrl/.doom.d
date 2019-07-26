@@ -2,8 +2,7 @@
 
 (after! ebib
   (setq ebib-bibtex-dialect 'biblatex
-        ebib-preload-bib-files '("/home/patrl/GitHub/bibliography/elliott_mybib.bib")
-
+        ebib-preload-bib-files '("/home/patrl/repos/bibliography/elliott_mybib.bib")
         ebib-index-mode-map (make-sparse-keymap)
         ebib-entry-mode-map (make-sparse-keymap))
   (map! (:map (ebib-index-mode-map)
