@@ -141,7 +141,7 @@
       +latex-bibtex-file "~/repos/bibliography/elliott_mybib.bib"
       ivy-bibtex-default-action 'ivy-bibtex-open-pdf
       ;; bibtex-completion-pdf-open-function  (lambda (fpath) (call-process "zathura" nil 0 nil fpath))
-      ;; +latex-viewers `(zathura pdf-tools)
+      +latex-viewers '(zathura)
       )
 
 (after! tex

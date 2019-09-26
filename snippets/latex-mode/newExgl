@@ -1,8 +1,12 @@
 # -*- mode: snippet -*-
 # name: new example
-# key: \ex
+# key: \exgl
 # expand-env: ((yas-indent-line 'fixed))
 # --
 
-\ex\label{$1}$2\xe
+\ex\label{$1}\begingl\gla\ljudge{$2}$3//
+\glb $4//
+\glft \enquote{$5}//
+\endgl
+\xe
 $>$0
