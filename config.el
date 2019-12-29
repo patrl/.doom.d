@@ -38,24 +38,22 @@
 ;;;;;;;;;;;;;;
 
 (after! org
-  (add-hook! org-mode '(visual-line-mode doom|disable-line-numbers)))
+  (add-hook! org-mode '(visual-line-mode doom-disable-line-numbers-h)))
 
 (def-package! org-cliplink
   :commands org-cliplink)
 
 ;; org tweaks
-(setq org-directory (expand-file-name "~/annex/org/")
+(setq org-directory (expand-file-name "~/Dropbox (MIT)/org/")
       org-agenda-files (list org-directory)
       org-ellipsis " ▼ "
       org-highlight-latex-and-related '(latex) ;; highlight latex fragments
       org-bullets-bullet-list '("#")) ;; markdown-style headings
 
-
-
 ;; TODO remove once my PR is accepted: https://github.com/hlissner/doom-emacs/pull/944
 (def-package! org-brain
   :init
-  (setq org-brain-path "~/annex/org/brain")
+  (setq org-brain-path "~/Dropbox (MIT)/org/brain")
   (add-to-list 'evil-motion-state-modes 'org-brain-visualize-mode)
   ;; (with-eval-after-load 'evil
   ;;   (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
@@ -71,7 +69,7 @@
 
 (setq org-publish-project-alist '(("org-brain"
                                    ;; dir for source files in org format
-                                   :base-directory "~/annex/org/brain"
+                                   :base-directory "~/Dropbox (MIT)/org/brain"
                                    :base-extension "org"
                                    :exclude "maths.org\\|coding.org\\|index.org"
                                    ;; html dir
@@ -117,7 +115,7 @@
 
 
 (after! deft
-  (setq deft-directory "~/annex/deft"
+  (setq deft-directory "~/Dropbox (MIT)/deft"
         deft-extensions '("org" "md" "tex")
         deft-use-filter-string-for-filename t
         deft-org-mode-title-prefix t))
@@ -135,7 +133,7 @@
 ;; tex ;;
 ;;;;;;;;;
 
-(setq bibtex-completion-library-path "~/annex/library/" ;; path to my pdf library
+(setq bibtex-completion-library-path "~/Dropbox (MIT)/library/" ;; path to my pdf library
       bibtex-completion-bibliography "~/repos/bibliography/elliott_mybib.bib"
       bibtex-completion-pdf-symbol "" ;; custom icon to indicate that a pdf is available
       +latex-bibtex-file "~/repos/bibliography/elliott_mybib.bib"
