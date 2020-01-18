@@ -7,15 +7,18 @@
 (setq user-full-name "Patrick D. Elliott"
       user-mail-address "patrick.d.elliott@gmail.com")
 
-(def-package! agda-input) ;; enable the agda input method globally. Depends on the agda module.
+(setq display-line-numbers nil)
 
 ;; counsel-linux-app looks in the right place for applications
-(setq counsel-linux-apps-directories '("/var/run/current-system/sw/share/applications"))
+;; (setq counsel-linux-apps-directories '("/var/run/current-system/sw/share/applications"))
 
 (set-popup-rule! "\*compilation\*" :ttl nil)
 
-(def-package! direnv
+(use-package! direnv
   :config (direnv-mode))
+
+(use-package! evil-terminal-cursor-changer
+  :hook (tty-setup . evil-terminal-cursor-changer-activate))
 
 ;;;;;;;;;;;;;;;;
 ;; appearance ;;
@@ -28,7 +31,7 @@
       ;; doom-variable-pitch-font (font-spec :family "Input Sans")
       doom-unicode-font (font-spec :name "DejaVu Sans Mono")
       doom-big-font (font-spec :family "IBM Plex Mono" :size 18.0)
-      doom-theme 'doom-one-light)
+      doom-theme 'doom-one)
       ;; doom-theme 'doom-dracula)
 
 (load! "+bindings.el") ;; load my custom bindings
@@ -38,20 +41,20 @@
 ;;;;;;;;;;;;;;
 
 (after! org
-  (add-hook! org-mode '(visual-line-mode doom-disable-line-numbers-h)))
+  (add-hook! org-mode '(visual-line-mode)))
 
-(def-package! org-cliplink
+(use-package! org-cliplink
   :commands org-cliplink)
 
 ;; org tweaks
-(setq org-directory (expand-file-name "~/Dropbox (MIT)/org/")
+(setq org-directory (expand-file-name "/mnt/c/Users/patri/Dropbox (MIT)/org/")
       org-agenda-files (list org-directory)
       org-ellipsis " ▼ "
       org-highlight-latex-and-related '(latex) ;; highlight latex fragments
       org-bullets-bullet-list '("#")) ;; markdown-style headings
 
 ;; TODO remove once my PR is accepted: https://github.com/hlissner/doom-emacs/pull/944
-(def-package! org-brain
+(use-package! org-brain
   :init
   (setq org-brain-path "~/Dropbox (MIT)/org/brain")
   (add-to-list 'evil-motion-state-modes 'org-brain-visualize-mode)
@@ -115,7 +118,7 @@
 
 
 (after! deft
-  (setq deft-directory "~/Dropbox (MIT)/deft"
+  (setq deft-directory "/mnt/c/Users/patri/Dropbox (MIT)/deft"
         deft-extensions '("org" "md" "tex")
         deft-use-filter-string-for-filename t
         deft-org-mode-title-prefix t))
@@ -203,7 +206,7 @@
         markdown-enable-math t))
 
 
-(def-package! pandoc-mode
+(use-package! pandoc-mode
   :hook markdown-mode
   :config
   (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings))

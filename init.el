@@ -5,6 +5,10 @@
        ;; (helm +childrame +fuzzy)
        (ivy +childframe +fuzzy)
 
+       :checkers
+       (syntax +childframe)
+       spell
+
        :ui
        doom
        doom-dashboard
@@ -25,6 +29,7 @@
        vc-gutter
        workspaces
        deft
+       zen
 
        :editor
        (evil +everywhere)
@@ -49,44 +54,41 @@
        ;; editorconfig
        ;; ein
        eval
-       (flycheck +childframe)
-       flyspell
        gist
        lookup
        make
        magit
        ;; (password-store +auth)
        (pass +auth)
-       pdf
+       ;; pdf
        ;; my tools:
-       org-noter
+       ;; org-noter
        ebib
 
        :lang
-       common-lisp       ; if you've seen one lisp, you've seen them all
-       clojure           ; java with a lisp
+       ;; common-lisp       ; if you've seen one lisp, you've seen them all
+       ;; clojure           ; java with a lisp
        data              ; config/data formats
        emacs-lisp        ; drown in parentheses
-       javascript
+       ;; javascript
        (haskell +dante)  ; a language that's lazier than I am
        (latex +latexmk +pdf-tools +unicode-math)
        (markdown +pandoc)
        nix               ; I hereby declare "nix geht mehr!"
        (org +pandoc)
-       rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       ;; rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        (sh +fish)
        web               ; the tubes
        ;; my langs:
-       coq
+       ;; coq
        idris
        agda
-       scheme
+       ;; scheme
 
        :app
-       mu4e
+       ;; mu4e
        ;; (email +gmail)
        (rss +org)
-       write
 
        :config
        (default +bindings +snippets))
