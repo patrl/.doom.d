@@ -21,14 +21,15 @@
 ;; appearance ;;
 ;;;;;;;;;;;;;;;;
 
+(setq display-line-numbers-type nil)
+
 (setq doom-font (font-spec :family "IBM Plex Mono" :size 11.0)
       ;; doom-font (font-spec :family "Input Mono" :size 11.0)
       doom-variable-pitch-font (font-spec :family "iA Writer Duospace") ;; this works great
-      +write-line-spacing 0.1
       ;; doom-variable-pitch-font (font-spec :family "Input Sans")
       doom-unicode-font (font-spec :name "DejaVu Sans Mono")
-      doom-big-font (font-spec :family "IBM Plex Mono" :size 18.0)
-      doom-theme 'doom-one-light)
+      doom-big-font (font-spec :family "IBM Plex Mono" :size 11.0)
+      doom-theme 'doom-dracula)
       ;; doom-theme 'doom-dracula)
 
 (load! "+bindings.el") ;; load my custom bindings
@@ -38,7 +39,7 @@
 ;;;;;;;;;;;;;;
 
 (after! org
-  (add-hook! org-mode '(visual-line-mode doom-disable-line-numbers-h)))
+  (add-hook! org-mode '(visual-line-mode)))
 
 (def-package! org-cliplink
   :commands org-cliplink)

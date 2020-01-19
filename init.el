@@ -25,6 +25,7 @@
        vc-gutter
        workspaces
        deft
+       zen
 
        :editor
        (evil +everywhere)
@@ -86,7 +87,6 @@
        mu4e
        ;; (email +gmail)
        (rss +org)
-       write
 
        :config
        (default +bindings +snippets))

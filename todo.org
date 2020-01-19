@@ -31,5 +31,4 @@ For some reasoning opening a literate haskell file (~.lhs~), results in a
 massive hang.
 * Plugins to investigate
 ** TODO [[https://github.com/noctuid/lispyville][lispyville]]
-** TODO [[https://github.com/larstvei/Focus][focus-mode]]
 ** TODO [[github:rexim/org-cliplink][org-cliplink]]
