@@ -91,7 +91,9 @@
    (:desc "notes" :prefix "n"
      :desc "Search bibliography" :n "b" #'ivy-bibtex
      :desc "deft" :n "d" #'deft
-     :desc "visualize brain" :n "m" #'org-brain-visualize)))
+     :desc "visualize brain" :n "m" #'org-brain-visualize)
+   "f o" #'browse-org-directory
+   ))
 
 (after! haskell-mode
   (map! :map haskell-mode-map

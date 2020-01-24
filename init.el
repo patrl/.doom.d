@@ -5,6 +5,10 @@
        ;; (helm +childrame +fuzzy)
        (ivy +childframe +fuzzy)
 
+       :checkers
+       (syntax +childframe)
+       spell
+
        :ui
        doom
        doom-dashboard
@@ -50,8 +54,6 @@
        ;; editorconfig
        ;; ein
        eval
-       (flycheck +childframe)
-       flyspell
        gist
        lookup
        make

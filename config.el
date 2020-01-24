@@ -7,14 +7,14 @@
 (setq user-full-name "Patrick D. Elliott"
       user-mail-address "patrick.d.elliott@gmail.com")
 
-(def-package! agda-input) ;; enable the agda input method globally. Depends on the agda module.
+(use-package! agda-input) ;; enable the agda input method globally. Depends on the agda module.
 
 ;; counsel-linux-app looks in the right place for applications
 (setq counsel-linux-apps-directories '("/var/run/current-system/sw/share/applications"))
 
 (set-popup-rule! "\*compilation\*" :ttl nil)
 
-(def-package! direnv
+(use-package! direnv
   :config (direnv-mode))
 
 ;;;;;;;;;;;;;;;;
@@ -23,14 +23,17 @@
 
 (setq display-line-numbers-type nil)
 
-(setq doom-font (font-spec :family "IBM Plex Mono" :size 11.0)
+(setq doom-font (font-spec :family "BlexMono Nerd Font" :size 11.0)
       ;; doom-font (font-spec :family "Input Mono" :size 11.0)
-      doom-variable-pitch-font (font-spec :family "iA Writer Duospace") ;; this works great
+      doom-variable-pitch-font (font-spec :family "iA Writer Duospace" :size 11.0) ;; this works great
       ;; doom-variable-pitch-font (font-spec :family "Input Sans")
       doom-unicode-font (font-spec :name "DejaVu Sans Mono")
-      doom-big-font (font-spec :family "IBM Plex Mono" :size 11.0)
-      doom-theme 'doom-dracula)
-      ;; doom-theme 'doom-dracula)
+      ;; doom-big-font (font-spec :family "IBM Plex Mono" :size 11.0)
+      )
+
+(when (display-graphic-p)
+  (setq doom-theme 'doom-dracula)
+  (setq doom-theme 'doom-one))
 
 (load! "+bindings.el") ;; load my custom bindings
 
@@ -41,7 +44,7 @@
 (after! org
   (add-hook! org-mode '(visual-line-mode)))
 
-(def-package! org-cliplink
+(use-package! org-cliplink
   :commands org-cliplink)
 
 ;; org tweaks
@@ -49,10 +52,10 @@
       org-agenda-files (list org-directory)
       org-ellipsis " ▼ "
       org-highlight-latex-and-related '(latex) ;; highlight latex fragments
-      org-bullets-bullet-list '("#")) ;; markdown-style headings
+      org-bullets-bullet-list '("☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷" "☷" "☷" "☷"))
 
 ;; TODO remove once my PR is accepted: https://github.com/hlissner/doom-emacs/pull/944
-(def-package! org-brain
+(use-package! org-brain
   :init
   (setq org-brain-path "~/Dropbox (MIT)/org/brain")
   (add-to-list 'evil-motion-state-modes 'org-brain-visualize-mode)
@@ -204,7 +207,7 @@
         markdown-enable-math t))
 
 
-(def-package! pandoc-mode
+(use-package! pandoc-mode
   :hook markdown-mode
   :config
   (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings))

@@ -29,3 +29,9 @@
 
 ;;;###autoload
 (add-hook 'org-brain-after-visualize-hook #'aa2u-buffer)
+
+;;;###autoload
+(defun browse-org-directory ()
+  "Browse the files in org-directory."
+  (interactive)
+  (doom-project-browse (expand-file-name org-directory)))
