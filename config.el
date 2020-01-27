@@ -21,7 +21,7 @@
 ;; appearance ;;
 ;;;;;;;;;;;;;;;;
 
-(setq display-line-numbers-type nil)
+(setq display-line-numbers-type nil) ;; line numbers are pretty slow. This also improves performance.
 
 (setq doom-font (font-spec :family "BlexMono Nerd Font" :size 11.0)
       ;; doom-font (font-spec :family "Input Mono" :size 11.0)
@@ -49,6 +49,7 @@
 
 ;; org tweaks
 (setq org-directory (expand-file-name "~/Dropbox (MIT)/org/")
+      org-archive-location (concat org-directory "archive/%s::")
       org-agenda-files (list org-directory)
       org-ellipsis " ▼ "
       org-highlight-latex-and-related '(latex) ;; highlight latex fragments
@@ -136,6 +137,8 @@
 ;;;;;;;;;
 ;; tex ;;
 ;;;;;;;;;
+
+(setq-hook! 'TeX-mode-hook +spellcheck-immediately nil)
 
 (setq bibtex-completion-library-path "~/Dropbox (MIT)/library/" ;; path to my pdf library
       bibtex-completion-bibliography "~/repos/bibliography/elliott_mybib.bib"
