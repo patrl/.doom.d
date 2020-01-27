@@ -1,0 +1,16 @@
+# key: tikzcd
+# name: tikz-cd-figure
+# --
+#+header: :file ./img/`(insert (format-time-string "%Y-%m-%d-"))`${2:$(substring yas/text 4)}.png
+#+header: :imagemagick "t"
+#+header: :results value file
+#+header: :results output raw
+#+header: :packages '(("" "tikz-cd"))
+#+header: :iminoptions -density 300 -resize 600 :buffer no :fit yes
+#+begin_src latex
+\begin{tikzcd}
+$0
+\end{tikzcd}
+%\caption{${1:Insert caption}}
+\label{${2:"waiting"$(unless yas/modified-p (reftex-label "figure" 'dont-insert))}}
+#+end_src
