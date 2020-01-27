@@ -58,7 +58,7 @@
 ;; TODO remove once my PR is accepted: https://github.com/hlissner/doom-emacs/pull/944
 (use-package! org-brain
   :init
-  (setq org-brain-path "~/Dropbox (MIT)/org/brain")
+  (setq org-brain-path (concat org-directory "brain"))
   (add-to-list 'evil-motion-state-modes 'org-brain-visualize-mode)
   ;; (with-eval-after-load 'evil
   ;;   (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
@@ -134,11 +134,14 @@
   ;; use experiment nix indent function
   (setq nix-indent-function 'nix-indent-line))
 
+
+
+
 ;;;;;;;;;
 ;; tex ;;
 ;;;;;;;;;
 
-(setq-hook! 'TeX-mode-hook +spellcheck-immediately nil)
+(setq-hook! 'TeX-mode-hook +spellcheck-immediately nil) ;; stop doom from immediately running a spell check on every tex mode file
 
 (setq bibtex-completion-library-path "~/Dropbox (MIT)/library/" ;; path to my pdf library
       bibtex-completion-bibliography "~/repos/bibliography/elliott_mybib.bib"
@@ -146,8 +149,7 @@
       +latex-bibtex-file "~/repos/bibliography/elliott_mybib.bib"
       ivy-bibtex-default-action 'ivy-bibtex-open-pdf
       ;; bibtex-completion-pdf-open-function  (lambda (fpath) (call-process "zathura" nil 0 nil fpath))
-      +latex-viewers '(zathura)
-      )
+      +latex-viewers '(zathura))
 
 (after! tex
   (setq-default TeX-engine 'xetex)) ;; set the default engine to xetex
@@ -218,10 +220,6 @@
 ;;;;;;;;;;;;;;;
 ;; debugging ;;
 ;;;;;;;;;;;;;;;
-
-;; for auth source debugging
-;; (setq auth-source-do-cache nil
-;; auth-source-debug t)
 
 ;; avoid incompatibilities between tramp and zsh
 (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
