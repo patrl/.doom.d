@@ -50,21 +50,23 @@
       org-bullets-bullet-list '("☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷" "☷" "☷" "☷"))
 
 ;; TODO remove once my PR is accepted: https://github.com/hlissner/doom-emacs/pull/944
-(use-package! org-brain
-  :init
-  (setq org-brain-path (concat org-directory "brain"))
-  (add-to-list 'evil-motion-state-modes 'org-brain-visualize-mode)
-  ;; (with-eval-after-load 'evil
-  ;;   (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
-  :config
-  (add-hook 'org-brain-visualize-mode-hook 'visual-line-mode)
-  (push '("b" "Brain" plain (function org-brain-goto-end)
-          "* %i%?" :empty-lines 1)
-        org-capture-templates)
-  (setq org-brain-visualize-default-choices 'root)
-  (setq org-brain-title-max-length 24)
-  ;; my additions
-  (set-popup-rule! "*org-brain*" :ignore t))
+;; (use-package! org-brain
+;;   :init
+;;   (setq org-brain-path (concat org-directory "brain"))
+;;   (add-to-list 'evil-motion-state-modes 'org-brain-visualize-mode)
+;;   ;; (with-eval-after-load 'evil
+;;   ;;   (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
+;;   :config
+;;   (add-hook 'org-brain-visualize-mode-hook 'visual-line-mode)
+;;   (push '("b" "Brain" plain (function org-brain-goto-end)
+;;           "* %i%?" :empty-lines 1)
+;;         org-capture-templates)
+;;   (setq org-brain-visualize-default-choices 'root)
+;;   (setq org-brain-title-max-length 24)
+;;   ;; my additions
+;;   (set-popup-rule! "*org-brain*" :ignore t))
+
+(setq org-brain-path (concat org-directory "brain"))
 
 (setq org-publish-project-alist '(("org-brain"
                                    ;; dir for source files in org format

@@ -12,18 +12,13 @@
        :ui
        doom
        doom-dashboard
-       ;; doom-quit
+       doom-quit
        ophints
-       ;; fci
        hl-todo
        modeline
        nav-flash
-       ;; neotree
        treemacs
        (popup +all +defaults)
-       ;; pretty-code
-       ;; unicode
-       ;; tabbar
        vi-tilde-fringe
        window-select
        vc-gutter
@@ -36,9 +31,7 @@
        file-templates
        fold
        format
-       ;; lispy
        multiple-cursors
-       ;; parinfer
        rotate-text
        snippets
 
@@ -51,15 +44,12 @@
        eshell
 
        :tools
-       ;; editorconfig
-       ;; ein
        direnv
        eval
        gist
        lookup
        make
        magit
-       ;; (password-store +auth)
        (pass +auth)
        pdf
        ;; my tools:
@@ -76,7 +66,7 @@
        (latex +latexmk +pdf-tools +unicode-math)
        (markdown +pandoc)
        nix               ; I hereby declare "nix geht mehr!"
-       (org +pandoc)
+       (org +brain +jupyter +pandoc +beamer)
        rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        (sh +fish)
        web               ; the tubes
