@@ -14,9 +14,6 @@
 
 (set-popup-rule! "\*compilation\*" :ttl nil)
 
-(use-package! direnv
-  :config (direnv-mode))
-
 ;;;;;;;;;;;;;;;;
 ;; appearance ;;
 ;;;;;;;;;;;;;;;;

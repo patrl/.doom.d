@@ -53,6 +53,7 @@
        :tools
        ;; editorconfig
        ;; ein
+       direnv
        eval
        gist
        lookup

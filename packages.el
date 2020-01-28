@@ -11,6 +11,4 @@
 
 (package! pandoc-mode)
 
-(package! direnv)
-
 ;; (package! ox-tufte)
