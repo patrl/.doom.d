@@ -41,9 +41,6 @@
 (after! org
   (add-hook! org-mode '(visual-line-mode)))
 
-(use-package! org-cliplink
-  :commands org-cliplink)
-
 ;; org tweaks
 (setq org-directory (expand-file-name "~/Dropbox (MIT)/org/")
       org-archive-location (concat org-directory "archive/%s::")
