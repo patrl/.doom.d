@@ -3,8 +3,10 @@
 
 (package! deadgrep)
 
-;; (package! ascii-art-to-unicode) ;; to make org-brain beautiful
+(package! ascii-art-to-unicode) ;; to make org-brain beautiful
 
 (package! pandoc-mode)
+
+(package! org-brain)
 
 ;; (package! ox-tufte)

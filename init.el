@@ -48,6 +48,7 @@
        eval
        gist
        lookup
+       lsp
        make
        magit
        (pass +auth)
@@ -62,11 +63,13 @@
        data              ; config/data formats
        emacs-lisp        ; drown in parentheses
        javascript
-       (haskell +dante)  ; a language that's lazier than I am
+       (haskell +lsp)  ; a language that's lazier than I am
+       ;; (haskell +dante)  ; a language that's lazier than I am
        (latex +latexmk +pdf-tools +unicode-math)
        (markdown +pandoc)
        nix               ; I hereby declare "nix geht mehr!"
-       (org +brain +jupyter +pandoc +beamer)
+       (org +jupyter +pandoc +beamer)
+       racket
        rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        (sh +fish)
        web               ; the tubes

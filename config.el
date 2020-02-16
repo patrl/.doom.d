@@ -22,7 +22,7 @@
 
 (setq doom-font (font-spec :family "BlexMono Nerd Font" :size 11.0)
       ;; doom-font (font-spec :family "Input Mono" :size 11.0)
-      doom-variable-pitch-font (font-spec :family "iA Writer Duospace" :size 11.0) ;; this works great
+      doom-variable-pitch-font (font-spec :family "iA Writer Duospace" :size 10.0) ;; this works great
       ;; doom-variable-pitch-font (font-spec :family "Input Sans")
       doom-unicode-font (font-spec :name "DejaVu Sans Mono")
       ;; doom-big-font (font-spec :family "IBM Plex Mono" :size 11.0)
@@ -46,27 +46,25 @@
       org-archive-location (concat org-directory "archive/%s::")
       org-agenda-files (list org-directory)
       org-ellipsis " ▼ "
-      org-highlight-latex-and-related '(latex) ;; highlight latex fragments
-      org-bullets-bullet-list '("☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷" "☷" "☷" "☷"))
+      org-highlight-latex-and-related '(latex)) ;; highlight latex fragments
+      ;; org-bullets-bullet-list '("☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷" "☷" "☷" "☷"))
 
 ;; TODO remove once my PR is accepted: https://github.com/hlissner/doom-emacs/pull/944
-;; (use-package! org-brain
-;;   :init
-;;   (setq org-brain-path (concat org-directory "brain"))
-;;   (add-to-list 'evil-motion-state-modes 'org-brain-visualize-mode)
-;;   ;; (with-eval-after-load 'evil
-;;   ;;   (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
-;;   :config
-;;   (add-hook 'org-brain-visualize-mode-hook 'visual-line-mode)
-;;   (push '("b" "Brain" plain (function org-brain-goto-end)
-;;           "* %i%?" :empty-lines 1)
-;;         org-capture-templates)
-;;   (setq org-brain-visualize-default-choices 'root)
-;;   (setq org-brain-title-max-length 24)
-;;   ;; my additions
-;;   (set-popup-rule! "*org-brain*" :ignore t))
-
-(setq org-brain-path (concat org-directory "brain"))
+(use-package! org-brain
+  :init
+  (setq org-brain-path "/home/patrl/Dropbox (MIT)/org/brain")
+  (add-to-list 'evil-motion-state-modes 'org-brain-visualize-mode)
+  ;; (with-eval-after-load 'evil
+  ;;   (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
+  :config
+  (add-hook 'org-brain-visualize-mode-hook 'visual-line-mode)
+  (push '("b" "Brain" plain (function org-brain-goto-end)
+          "* %i%?" :empty-lines 1)
+        org-capture-templates)
+  (setq org-brain-visualize-default-choices 'root)
+  (setq org-brain-title-max-length 24)
+  ;; my additions
+  (set-popup-rule! "*org-brain*" :ignore t))
 
 (setq org-publish-project-alist '(("org-brain"
                                    ;; dir for source files in org format
@@ -112,7 +110,7 @@
 ;; https://emacs.stackexchange.com/questions/30341/how-do-i-customize-the-process-that-gets-triggered-in-org-preview-latex-fragment/33172#33172
 (setq org-preview-latex-default-process 'dvisvgm)
 (setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
-(add-to-list 'org-latex-packages-alist '("" "unicode-math"))
+;; (add-to-list 'org-latex-packages-alist '("" "unicode-math"))
 
 
 (after! deft
@@ -163,15 +161,21 @@
 ;;;;;;;;;;;;;
 
 ;; active dante-mode snippets in dante-mode (since it's a minor mode)
-(add-hook 'dante-mode-hook
-          #'(lambda ()
-              (yas-activate-extra-mode 'dante-mode)))
+;; (add-hook 'dante-mode-hook
+          ;; #'(lambda ()
+              ;; (yas-activate-extra-mode 'dante-mode)))
 
 ;; enable dante eldoc support
-(setq dante-tap-type-time 0.5)
+;; (setq dante-tap-type-time 0.5)
 
 ;; ensures that impure-nix is tried before nix.
-(setq dante-methods '(new-build bare-ghci))
+;; (setq dante-methods '(new-build))
+
+;; lsp mode with ghcide
+(setq lsp-haskell-process-path-hie "ghcide")
+(setq lsp-haskell-process-args-hie '())
+ ;; Comment/uncomment this line to see interactions between lsp client/server.
+(setq lsp-log-io t)
 
 ;;;;;;;;;;;;
 ;; eshell ;;
