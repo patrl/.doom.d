@@ -7,7 +7,10 @@
 (setq user-full-name "Patrick D. Elliott"
       user-mail-address "patrick.d.elliott@gmail.com")
 
-(use-package! agda-input) ;; enable the agda input method globally. Depends on the agda module.
+;; (use-package! agda-input) ;; FIXME enable the agda input method globally. Depends on the agda module.
+(add-load-path! "lisp")
+
+(require 'agda-input)
 
 ;; counsel-linux-app looks in the right place for applications
 (setq counsel-linux-apps-directories '("/var/run/current-system/sw/share/applications"))
@@ -156,6 +159,12 @@
     (setq-local company-math-allow-unicode-symbols-in-faces (quote (tex-math font-latex-math-face)))
     (setq-local company-math-disallow-unicode-symbols-in-faces nil)))
 
+;;;;;;;;;;;;;;;;
+;; purescript ;;
+;;;;;;;;;;;;;;;;
+
+(setq psc-ide-use-npm-bin t)
+
 ;;;;;;;;;;;;;
 ;; haskell ;;
 ;;;;;;;;;;;;;
@@ -166,7 +175,7 @@
               ;; (yas-activate-extra-mode 'dante-mode)))
 
 ;; enable dante eldoc support
-;; (setq dante-tap-type-time 0.5)
+(setq dante-tap-type-time 0.5)
 
 ;; ensures that impure-nix is tried before nix.
 ;; (setq dante-methods '(new-build))
