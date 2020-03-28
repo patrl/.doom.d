@@ -7,6 +7,8 @@
 (setq user-full-name "Patrick D. Elliott"
       user-mail-address "patrick.d.elliott@gmail.com")
 
+(setq delete-by-moving-to-trash t)
+
 ;; (use-package! agda-input) ;; FIXME enable the agda input method globally. Depends on the agda module.
 (add-load-path! "lisp")
 
