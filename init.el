@@ -68,7 +68,7 @@
        (latex +latexmk +pdf-tools +unicode-math)
        (markdown +pandoc)
        nix               ; I hereby declare "nix geht mehr!"
-       (org +jupyter +pandoc +beamer)
+       (org +jupyter +pandoc +beamer +roam)
        purescript
        racket
        rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()

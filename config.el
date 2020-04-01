@@ -117,6 +117,10 @@
 (setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
 ;; (add-to-list 'org-latex-packages-alist '("" "unicode-math"))
 
+(setq org-roam-directory "~/Dropbox (MIT)/org/roam/"
+      org-roam-completion-system 'ivy
+      )
+
 
 (after! deft
   (setq deft-directory "~/Dropbox (MIT)/deft"
