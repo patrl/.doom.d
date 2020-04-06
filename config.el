@@ -71,19 +71,34 @@
   ;; my additions
   (set-popup-rule! "*org-brain*" :ignore t))
 
-(setq org-publish-project-alist '(("org-brain"
+(setq org-publish-project-alist '(("roam"
                                    ;; dir for source files in org format
-                                   :base-directory "~/Dropbox (MIT)/org/brain"
+                                   :base-directory "~/Dropbox (MIT)/org/roam"
                                    :base-extension "org"
-                                   :exclude "maths.org\\|coding.org\\|index.org"
+                                   :recursive nil
+                                   :with-author user-full-name
+                                   :with-email user-mail-address
+                                   :with-creator user-full-name
+                                   ;; :exclude "maths.org\\|index.org"
                                    ;; html dir
                                    :publishing-directory "~/keybase/private/patrl,kbpbot/wiki"
                                    :publishing-function org-html-publish-to-html
-                                   :recursive t
                                    :auto-sitemap t
-                                   :sitemap-title "Brain"
+                                   :sitemap-title "Roam"
                                    :sitemap-filename "index"
-                                   )))
+                                   :html-html5-fancy t
+                                   :html-doctype "html5"
+                                   :html-head-include-default-style nil
+                                   :html-head-extra "<link rel=\"stylesheet\" type=\"text/css\" href=\"styling.css\" />"
+                                   )
+
+                                  ("css"
+                                    :base-directory "~/Dropbox (MIT)/org/roam/css"
+                                    :base-extension "css"
+                                    :publishing-directory "~/keybase/private/patrl,kbpbot/wiki"
+                                    :publishing-function org-publish-attachment)
+
+                                  ("wiki" :components ("roam" "css"))))
 
 '(org-preview-latex-process-alist ;; latex fragment preview with xelatex (allows unicode symbols)
   (quote
@@ -118,8 +133,7 @@
 ;; (add-to-list 'org-latex-packages-alist '("" "unicode-math"))
 
 (setq org-roam-directory "~/Dropbox (MIT)/org/roam/"
-      org-roam-completion-system 'ivy
-      )
+      org-roam-completion-system 'ivy)
 
 
 (after! deft
