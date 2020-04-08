@@ -5,4 +5,6 @@
 
 (package! pandoc-mode)
 
+(package! ivy-bibtex)
+
 ;; (package! ox-tufte)
