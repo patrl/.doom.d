@@ -2,7 +2,6 @@
 
 (doom! :completion
        company
-       ;; (helm +childrame +fuzzy)
        (ivy +childframe +fuzzy)
 
        :checkers
@@ -36,8 +35,9 @@
        snippets
 
        :emacs
-       (dired +ranger)
+       (dired +ranger +icons)
        electric
+       (ibuffer +icons)
        vc
 
        :term
@@ -82,8 +82,10 @@
 
        :app
        mu4e
-       ;; (email +gmail)
        (rss +org)
+
+       :email
+       notmuch
 
        :config
        (default +bindings +snippets))
