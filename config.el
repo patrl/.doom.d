@@ -39,6 +39,8 @@
 
 (load! "+bindings.el") ;; load my custom bindings
 
+(setq +zen-text-scale 1)
+
 ;;;;;;;;;;;;;;
 ;; org-mode ;;
 ;;;;;;;;;;;;;;
@@ -56,9 +58,9 @@
 
 (setq org-publish-project-alist '(("roam"
                                    ;; dir for source files in org format
-                                   :base-directory "~/Dropbox (MIT)/org/roam"
+                                   :base-directory "~/Dropbox (MIT)/org/wiki"
                                    :base-extension "org"
-                                   :recursive nil
+                                   :recursive t
                                    :with-author user-full-name
                                    :with-email user-mail-address
                                    :with-creator user-full-name
@@ -76,7 +78,7 @@
                                    )
 
                                   ("css"
-                                    :base-directory "~/Dropbox (MIT)/org/roam/css"
+                                    :base-directory "~/Dropbox (MIT)/org/css"
                                     :base-extension "css"
                                     :publishing-directory "~/keybase/private/patrl,kbpbot/wiki"
                                     :publishing-function org-publish-attachment)
@@ -115,13 +117,13 @@
 (setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
 ;; (add-to-list 'org-latex-packages-alist '("" "unicode-math"))
 
-(setq org-roam-directory "~/Dropbox (MIT)/org/roam/"
+(setq org-roam-directory "~/Dropbox (MIT)/org/wiki/"
       org-roam-completion-system 'ivy)
 
 
 (after! deft
-  (setq deft-directory "~/Dropbox (MIT)/deft"
-        deft-extensions '("org" "md" "tex")
+  (setq deft-directory "~/Dropbox (MIT)/org/notes"
+        deft-default-extension "org"
         deft-use-filter-string-for-filename t
         deft-org-mode-title-prefix t))
 
