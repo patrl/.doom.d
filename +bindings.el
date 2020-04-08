@@ -13,7 +13,7 @@
  (:after treemacs-evil
    (:map evil-treemacs-state-map
      "C-h" #'evil-window-left
-     "C-l" #'evil-window-right))
+     "C-l" #'evil-window-right)))
 
 (map!
  (:leader
@@ -22,8 +22,7 @@
 
    (:desc "notes" :prefix "n"
      :desc "Search bibliography" :n "b" #'ivy-bibtex
-     :desc "deft" :n "d" #'deft
-     :desc "visualize brain" :n "m" #'org-brain-visualize)
+     :desc "deft" :n "d" #'deft)
    "f o" #'browse-org-directory
    ))
 
