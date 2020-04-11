@@ -21,8 +21,7 @@
      :desc "Make project" :n "m" #'+make/run)
 
    (:desc "notes" :prefix "n"
-     :desc "Search bibliography" :n "b" #'ivy-bibtex
-     :desc "deft" :n "d" #'deft)
+     :desc "Search bibliography" :n "b" #'ivy-bibtex)
    "f o" #'browse-org-directory
    ))
 
