@@ -9,12 +9,12 @@
 
 (setq delete-by-moving-to-trash t)
 
-;; (use-package! agda-input) ;; FIXME enable the agda input method globally. Depends on the agda module.
 (add-load-path! "lisp")
 
-(require 'agda-input)
+(require 'agda-input) ;; since agda is currently broken on NixOS, I'm simply including agda-input.el in my config.
 
 ;; counsel-linux-app looks in the right place for applications
+;; Note that this is NixOS specific
 (setq counsel-linux-apps-directories '("/var/run/current-system/sw/share/applications"))
 
 (set-popup-rule! "\*compilation\*" :ttl nil)
