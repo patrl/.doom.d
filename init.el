@@ -39,11 +39,13 @@
        electric
        (ibuffer +icons)
        vc
+       undo
 
        :term
        eshell
 
        :tools
+       biblio
        direnv
        eval
        gist
@@ -83,9 +85,6 @@
        :app
        mu4e
        (rss +org)
-
-       :email
-       notmuch
 
        :config
        (default +bindings +snippets))
