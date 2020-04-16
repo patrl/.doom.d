@@ -10,7 +10,7 @@
   :config
   (add-hook! 'mu4e-view-mode-hook
     (setq-local truncate-lines nil))
-  (add-hook! 'message-send-hook 'mml-secure-message-sign-pgpmime) ;; cryptographically sign sent messages
+  ;; (add-hook! 'message-send-hook 'mml-secure-message-sign-pgpmime) ;; cryptographically sign sent messages
   (setq mu4e-get-mail-command "mbsync -a"
         mu4e-change-filenames-when-moving t
         mu4e-update-interval nil ;; don't update automatically
@@ -69,33 +69,30 @@
                                                 ("/personal/Inbox" . ?i)))
                      ))
            ,(make-mu4e-context
-             :name "zas - elliott@leibniz-zas.de"
+             :name "mit - pdell@mit.edu"
              :match-func (lambda (msg)
                            (when msg
                              (mu4e-message-contact-field-matches msg
-                                                                 :to "elliott@leibniz-zas.de")))
+                                                                 :to "pdell@mit.edu")))
              :vars `(
-                     (mu4e-refile-folder . "/zas/archive")
-                     (mu4e-sent-folder . "/zas/sent")
-                     (mu4e-trash-folder . "/zas/trash")
-                     (mu4e-drafts-folder . "/zas/drafts")
-                     (user-mail-address . "elliott@leibniz-zas.de")
+                     (mu4e-refile-folder . "/mit/archive")
+                     (mu4e-sent-folder . "/mit/sent")
+                     (mu4e-trash-folder . "/mit/trash")
+                     (mu4e-drafts-folder . "/mit/drafts")
+                     (user-mail-address . "pdell@mit.edu")
                      (user-full-name . "Patrick Elliott")
-                     (smtpmail-default-smtp-server . "smtp.office365.com")
-                     (smtpmail-smtp-user . "elliott@leibniz-zas.de")
-                     (smtpmail-smtp-server . "smtp.office365.com")
+                     (smtpmail-default-smtp-server . "outgoing.mit.edu")
+                     (smtpmail-smtp-user . "pdell")
+                     (smtpmail-smtp-server . "outgoing.mit.edu")
                      (smtpmail-smtp-service . 587)
                      (mu4e-compose-signature . (concat "Dr. Patrick D. Elliott\n"
-                                                       "Leibniz-Zentrum für Allgemeine Sprachwissenschaft\n"
-                                                       "Schützenstr. 18\n"
-                                                       "10117 Berlin\n"
                                                        "\n"
                                                        "-- Sent via mu4e\n"))
-                     (mu4e-maildir-shortcuts . (("/zas/archive" . ?a)
-                                                ("/zas/sent" . ?s)
-                                                ("/zas/trash" . ?t)
-                                                ("/zas/drafts" . ?d)
-                                                ("/zas/Inbox" . ?i)))
+                     (mu4e-maildir-shortcuts . (("/mit/archive" . ?a)
+                                                ("/mit/sent" . ?s)
+                                                ("/mit/trash" . ?t)
+                                                ("/mit/drafts" . ?d)
+                                                ("/mit/Inbox" . ?i)))
                      ))
            ))
   ;; (setq mu4e-context-policy 'pick-first)
