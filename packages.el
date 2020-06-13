@@ -3,6 +3,9 @@
 
 (package! deadgrep)
 
-(package! pandoc-mode)
+(package! org-roam-server)
 
+(package! org-ref)
+
+(package! org-roam-bibtex)
 ;; (package! ox-tufte)
