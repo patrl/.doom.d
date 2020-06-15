@@ -1,11 +1,11 @@
 ;;; ~/.doom.d/app/mu4e/config.el -*- lexical-binding: t; -*-
 
-(def-package! mu4e
+(use-package! mu4e
   :commands (mu4e mu4e-compose-new)
   :init
   (provide 'html2text) ; disable obsolete package
-  (setq mu4e-maildir "~/.mail"
-        mu4e-attachment-dir "~/.mail/.attachments"
+  (setq mu4e-maildir "~/.mail" ;; where my mail is stored
+        mu4e-attachment-dir "~/.mail/.attachments" ;; where my attachments are stored
         mu4e-user-mail-address-list nil)
   :config
   (add-hook! 'mu4e-view-mode-hook
@@ -18,13 +18,12 @@
         mu4e-sent-messages-behavior 'sent ;; delete sent messages
         mu4e-index-lazy-check t
         mu4e-hide-index-messages t
-        mu4e-view-show-addresses t
+        mu4e-view-show-addresses t ;; show full addresses in view message, instead of just names
         mu4e-view-show-images t
         mu4e-view-image-max-width 800
         mu4e-compose-format-flowed t
         mu4e-compose-signature-auto-include t
-        ;; mu4e-attachment-dir "~/Downloads"
-        message-send-mail-function #'smtpmail-send-it
+        message-send-mail-function #'smtpmail-send-it ;; use emacs built-in smtpmail function to send mail
         smtpmail-stream-type 'starttls
         ;; smtpmail-stream-type 'ssl
         ;; smtpmail-debug-info t
@@ -58,6 +57,7 @@
                      ;; (smtpmail-auth-credentials . (expand-file-name "~/.authinfo"))
                      (smtpmail-smtp-service . 587)
                      ;; (smtpmail-smtp-service . 465)
+                     ;; my personal sig
                      (mu4e-compose-signature . (concat "Patrick D. Elliott\n"
                                                        "\"You know I always wanted to pretend to be an architect\"\n"
                                                        "\n"
@@ -85,7 +85,9 @@
                      (smtpmail-smtp-user . "pdell")
                      (smtpmail-smtp-server . "outgoing.mit.edu")
                      (smtpmail-smtp-service . 587)
-                     (mu4e-compose-signature . (concat "Dr. Patrick D. Elliott\n"
+                     ;; my mit sig
+                     (mu4e-compose-signature . (concat "Patrick D. Elliott\n"
+                                                       "Postdoctoral Associate, Massachusetts Institute of Technology\n"
                                                        "\n"
                                                        "-- Sent via mu4e\n"))
                      (mu4e-maildir-shortcuts . (("/mit/archive" . ?a)
@@ -107,7 +109,7 @@
                                    mu4e-compose-mode mu4e~update-mail-mode))
       (evil-set-initial-state mode 'normal))))
 
-(def-package! mu4e-maildirs-extension
+(use-package! mu4e-maildirs-extension
   :after mu4e
   :config
   (mu4e-maildirs-extension)
@@ -117,7 +119,7 @@
         mu4e-maildirs-extension-maildir-expanded-prefix "-"
         mu4e-maildirs-extension-maildir-default-prefix "|"))
 
-(def-package! org-mu4e
+(use-package! org-mu4e
   :hook (mu4e-compose-mode . org-mu4e-compose-org-mode)
   :config
   (setq org-mu4e-link-query-in-headers-mode nil
