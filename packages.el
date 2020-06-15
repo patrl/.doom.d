@@ -5,7 +5,4 @@
 
 (package! org-roam-server)
 
-(package! org-ref)
-
-(package! org-roam-bibtex)
 ;; (package! ox-tufte)
