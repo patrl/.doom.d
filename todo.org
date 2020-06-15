@@ -1,35 +1,24 @@
-#+title: todo
+#+title: TODO
 
-* agda
-** TODO fix syntax-highlighting upstream
+* pollen
+** TODO get file extension autoload working properly
 * make
 ** TODO figure out a nice way to treat compilation popups
-* Org
-** TODO start org with truncated lines automatically
-This has something to do with the ~org-startup-truncated~ variable.
-** TODO sort out org-roam directory
-* ebib
-** TODO define evil-compatible bindings
-* deft
-** TODO get ~deft~ to auto-insert titles for new org-mode files
-Maybe file templates are messing with this?
-
 * Markdown
 ** TODO fontification for superscript and subscript
-
 * eshell
 ** TODO improve eshell completion, maybe using ~esh-autosuggest~
-* org-brain
-** TODO manage ~org-brain-visualize~ buffer with ~set-popup-rule!~
-* write
-** TODO disable ~hl-line-mode~ when ~+write-mode~ is active
-** TODO figure out top padding in ~+write-mode~
-** TODO only variable pitch font gets scaled in ~+write-mode~. Looks terrible
 * haskell
-** TODO configure nix-shell hoogle to work with haskell-mode
 ** TODO fix literate haskell mode
 For some reasoning opening a literate haskell file (~.lhs~), results in a
 massive hang.
 * Plugins to investigate
-** TODO [[https://github.com/noctuid/lispyville][lispyville]]
-** DONE [[github:rexim/org-cliplink][org-cliplink]]
+
+See here for a nice notes setup using org and org-ref: [[https://rgoswami.me/posts/org-note-workflow/#org-ref][An Orgmode Note Workflow :: Rohit Goswami — Reflections]]
+
+** DONE [[https://github.com/org-roam/org-roam-server][GitHub - org-roam/org-roam-server: A Web Application to Visualize the Org-Roa...]]
+** [[https://github.com/jkitchin/org-ref][GitHub - jkitchin/org-ref: org-mode modules for citations, cross-references, ...]]
+** [[https://github.com/org-roam/org-roam-bibtex][GitHub - org-roam/org-roam-bibtex: Connector between Org-roam, BibTeX-complet...]]
+
+* Dhall
+** TODO make dhall doom module
