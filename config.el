@@ -7,17 +7,23 @@
 (setq user-full-name "Patrick D. Elliott"
       user-mail-address "patrick.d.elliott@gmail.com")
 
-(setq delete-by-moving-to-trash t)
+(setq delete-by-moving-to-trash t) ;; use trash-cli rather than rm when deleting files.
 
-(add-load-path! "lisp")
+(add-load-path! "lisp") ;; used to load my own custom lisp files (currently just agda input)
 
-(require 'agda-input) ;; since agda is currently broken on NixOS, I'm simply including agda-input.el in my config.
+(require 'agda-input) ;; loads agda-input, which is useful in places other than just agda-mode
 
-;; counsel-linux-app looks in the right place for applications
-;; Note that this is NixOS specific
-(setq counsel-linux-apps-directories '("/var/run/current-system/sw/share/applications"))
+(set-popup-rule! "\*compilation\*" :ttl nil) ;; means that compilation processes aren't killed after the associated buffer is closed. Useful for file watching.
 
-(set-popup-rule! "\*compilation\*" :ttl nil)
+(setq +notes-dir (expand-file-name "~/notes")
+      +bib-file (expand-file-name "~/repos/bibliography/master.bib")
+      +pdf-lib (expand-file-name "~/Dropbox (MIT)/library"))
+
+;;;;;;;;;;;
+;; NixOS ;;
+;;;;;;;;;;;
+
+(setq counsel-linux-apps-directories '("/var/run/current-system/sw/share/applications")) ;; FIXME This isn't actually ideal, since I'm installing almost everything via home-manager.
 
 ;;;;;;;;;;;;;;;;
 ;; appearance ;;
@@ -26,106 +32,101 @@
 (setq display-line-numbers-type nil) ;; line numbers are pretty slow. This also improves performance.
 
 (setq doom-font (font-spec :family "BlexMono Nerd Font" :size 11.0)
-      ;; doom-font (font-spec :family "Input Mono" :size 11.0)
-      doom-variable-pitch-font (font-spec :family "iA Writer Duospace" :size 10.0) ;; this works great
-      ;; doom-variable-pitch-font (font-spec :family "Input Sans")
-      doom-unicode-font (font-spec :name "DejaVu Sans Mono")
-      ;; doom-big-font (font-spec :family "IBM Plex Mono" :size 11.0)
-      )
+      doom-variable-pitch-font (font-spec :family "iA Writer Duospace" :size 10.0)
+      doom-unicode-font (font-spec :name "DejaVu Sans Mono"))
 
 (when (display-graphic-p)
-  (setq doom-theme 'doom-dracula)
-  (setq doom-theme 'doom-one))
+  (setq doom-theme 'doom-gruvbox) ;; uses doom-dracula theme in gui mode
+  (setq doom-theme 'doom-one)) ;; uses doom-one them otherwise
 
 (load! "+bindings.el") ;; load my custom bindings
 
-(setq +zen-text-scale 1)
+(setq +zen-text-scale 1) ;; correctly sets the text scale in zen mode.
+
+;;;;;;;;;;;;
+;; direnv ;;
+;;;;;;;;;;;;
+
+(add-hook 'before-hack-local-variables-hook #'direnv-update-environment)
 
 ;;;;;;;;;;;;;;
 ;; org-mode ;;
 ;;;;;;;;;;;;;;
 
+(setq org-journal-file-format "%Y%m%d.org")
+
+;; general org-mode tweaks
 (after! org
   (add-hook! org-mode '(visual-line-mode)))
 
-;; org tweaks
 (setq org-directory (expand-file-name "~/Dropbox (MIT)/org/")
       org-archive-location (concat org-directory "archive/%s::")
-      org-agenda-files (list org-directory)
       org-ellipsis " ▼ "
-      org-highlight-latex-and-related '(latex)) ;; highlight latex fragments
-      ;; org-bullets-bullet-list '("☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷" "☷" "☷" "☷"))
+      org-agenda-files (list org-directory)
+      org-superstar-headline-bullets-list '("#")
+      org-highlight-latex-and-related '(latex) ;; highlight latex fragments
+      )
 
-(setq org-publish-project-alist '(("roam"
-                                   ;; dir for source files in org format
-                                   :base-directory "~/Dropbox (MIT)/org/wiki"
-                                   :base-extension "org"
-                                   :recursive t
-                                   :with-author user-full-name
-                                   :with-email user-mail-address
-                                   :with-creator user-full-name
-                                   ;; :exclude "maths.org\\|index.org"
-                                   ;; html dir
-                                   :publishing-directory "~/keybase/private/patrl,kbpbot/wiki"
-                                   :publishing-function org-html-publish-to-html
-                                   :auto-sitemap t
-                                   :sitemap-title "Roam"
-                                   :sitemap-filename "index"
-                                   :html-html5-fancy t
-                                   :html-doctype "html5"
-                                   :html-head-include-default-style nil
-                                   :html-head-extra "<link rel=\"stylesheet\" type=\"text/css\" href=\"styling.css\" />"
-                                   )
+;; deft tweaks
+(setq deft-directory +notes-dir)
 
-                                  ("css"
-                                    :base-directory "~/Dropbox (MIT)/org/css"
-                                    :base-extension "css"
-                                    :publishing-directory "~/keybase/private/patrl,kbpbot/wiki"
-                                    :publishing-function org-publish-attachment)
+;; org-noter tweaks
+(setq org-noter-notes-window-location 'other-frame
+        org-noter-always-create-frame nil
+        org-noter-hide-other nil
+        org-noter-notes-search-path +notes-dir)
 
-                                  ("wiki" :components ("roam" "css"))))
+;; org-roam tweaks
+(setq org-roam-directory +notes-dir
+      org-roam-completion-system 'ivy)
+
+;; Since the org module lazy loads org-protocol (waits until an org URL is
+;; detected), we can safely chain `org-roam-protocol' to it.
+(use-package! org-roam-protocol
+  :after org-protocol)
+
+(use-package! org-roam-server
+  :ensure t
+  :config
+  (setq org-roam-server-host "127.0.0.1"
+        org-roam-server-port 8080
+        org-roam-server-export-inline-images t
+        org-roam-server-authenticate nil
+        org-roam-server-label-truncate t
+        org-roam-server-label-truncate-length 60
+        org-roam-server-label-wrap-length 20))
 
 '(org-preview-latex-process-alist ;; latex fragment preview with xelatex (allows unicode symbols)
   (quote
-  ((dvipng :programs
-    ("lualatex" "dvipng")
-    :description "dvi > png" :message "you need to install the programs: latex and dvipng." :image-input-type "dvi" :image-output-type "png" :image-size-adjust
-    (1.0 . 1.0)
-    :latex-compiler
-    ("lualatex -output-format dvi -interaction nonstopmode -output-directory %o %f")
-    :image-converter
-    ("dvipng -fg %F -bg %B -D %D -T tight -o %O %f"))
-(dvisvgm :programs
-      ("latex" "dvisvgm")
-      :description "dvi > svg" :message "you need to install the programs: latex and dvisvgm." :use-xcolor t :image-input-type "xdv" :image-output-type "svg" :image-size-adjust
-      (1.7 . 1.5)
-      :latex-compiler
-      ("xelatex -no-pdf -interaction nonstopmode -output-directory %o %f")
-      :image-converter
-      ("dvisvgm %f -n -b min -c %S -o %O"))
-(imagemagick :programs
-          ("latex" "convert")
-          :description "pdf > png" :message "you need to install the programs: latex and imagemagick." :use-xcolor t :image-input-type "pdf" :image-output-type "png" :image-size-adjust
-          (1.0 . 1.0)
-          :latex-compiler
-          ("xelatex -no-pdf -interaction nonstopmode -output-directory %o %f")
-          :image-converter
-          ("convert -density %D -trim -antialias %f -quality 100 %O")))))
+   ((dvipng :programs
+            ("lualatex" "dvipng")
+            :description "dvi > png" :message "you need to install the programs: latex and dvipng." :image-input-type "dvi" :image-output-type "png" :image-size-adjust
+            (1.0 . 1.0)
+            :latex-compiler
+            ("lualatex -output-format dvi -interaction nonstopmode -output-directory %o %f")
+            :image-converter
+            ("dvipng -fg %F -bg %B -D %D -T tight -o %O %f"))
+    (dvisvgm :programs
+             ("latex" "dvisvgm")
+             :description "dvi > svg" :message "you need to install the programs: latex and dvisvgm." :use-xcolor t :image-input-type "xdv" :image-output-type "svg" :image-size-adjust
+             (1.7 . 1.5)
+             :latex-compiler
+             ("xelatex -no-pdf -interaction nonstopmode -output-directory %o %f")
+             :image-converter
+             ("dvisvgm %f -n -b min -c %S -o %O"))
+    (imagemagick :programs
+                 ("latex" "convert")
+                 :description "pdf > png" :message "you need to install the programs: latex and imagemagick." :use-xcolor t :image-input-type "pdf" :image-output-type "png" :image-size-adjust
+                 (1.0 . 1.0)
+                 :latex-compiler
+                 ("xelatex -no-pdf -interaction nonstopmode -output-directory %o %f")
+                 :image-converter
+                 ("convert -density %D -trim -antialias %f -quality 100 %O")))))
 
 ;; https://emacs.stackexchange.com/questions/30341/how-do-i-customize-the-process-that-gets-triggered-in-org-preview-latex-fragment/33172#33172
 (setq org-preview-latex-default-process 'dvisvgm)
 (setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
-;; (add-to-list 'org-latex-packages-alist '("" "unicode-math"))
 
-(setq org-roam-directory "~/Dropbox (MIT)/org/wiki/"
-      org-roam-completion-system 'ivy)
-
-
-(after! deft
-  (setq deft-directory "~/Dropbox (MIT)/org/notes"
-        deft-default-extension "org"
-        deft-use-filter-string-for-filename t
-        deft-org-mode-title-prefix t))
 
 ;;;;;;;;;
 ;; nix ;;
@@ -137,21 +138,21 @@
   (setq nix-indent-function 'nix-indent-line))
 
 
-
-
 ;;;;;;;;;
 ;; tex ;;
 ;;;;;;;;;
 
 (setq-hook! 'TeX-mode-hook +spellcheck-immediately nil) ;; stop doom from immediately running a spell check on every tex mode file
 
-(setq bibtex-completion-library-path "~/Dropbox (MIT)/library/" ;; path to my pdf library
-      bibtex-completion-bibliography "~/repos/bibliography/elliott_mybib.bib"
-      bibtex-completion-pdf-symbol "" ;; custom icon to indicate that a pdf is available
-      +latex-bibtex-file "~/repos/bibliography/elliott_mybib.bib"
+(setq bibtex-completion-bibliography +bib-file
       ivy-bibtex-default-action 'ivy-bibtex-open-pdf
       ;; bibtex-completion-pdf-open-function  (lambda (fpath) (call-process "zathura" nil 0 nil fpath))
       +latex-viewers '(zathura))
+
+(setq bibtex-completion-library-path +pdf-lib ;; path to my pdf library
+      bibtex-completion-notes-path +notes-dir
+      bibtex-completion-pdf-field "file"
+      bibtex-completion-pdf-symbol "") ;; custom icon to indicate that a pdf is available)
 
 (after! tex
   (setq-default TeX-engine 'xetex)) ;; set the default engine to xetex
@@ -174,21 +175,7 @@
 ;; haskell ;;
 ;;;;;;;;;;;;;
 
-;; active dante-mode snippets in dante-mode (since it's a minor mode)
-;; (add-hook 'dante-mode-hook
-          ;; #'(lambda ()
-              ;; (yas-activate-extra-mode 'dante-mode)))
-
-;; enable dante eldoc support
-(setq dante-tap-type-time 0.5)
-
-;; ensures that impure-nix is tried before nix.
-;; (setq dante-methods '(new-build))
-
-;; lsp mode with ghcide
-(setq lsp-haskell-process-path-hie "ghcide")
-(setq lsp-haskell-process-args-hie '())
- ;; Comment/uncomment this line to see interactions between lsp client/server.
+;; Comment/uncomment this line to see interactions between lsp client/server.
 (setq lsp-log-io t)
 
 ;;;;;;;;;;;;
@@ -225,11 +212,6 @@
         ;; enable math highlighting
         markdown-enable-math t))
 
-
-(use-package! pandoc-mode
-  :hook markdown-mode
-  :config
-  (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings))
 
 ;;;;;;;;;;;;;;;
 ;; debugging ;;

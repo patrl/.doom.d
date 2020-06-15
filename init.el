@@ -47,7 +47,7 @@
        :tools
        biblio
        direnv
-       eval
+       (eval +overlay)
        gist
        lookup
        lsp
@@ -63,24 +63,26 @@
        common-lisp       ; if you've seen one lisp, you've seen them all
        clojure           ; java with a lisp
        data              ; config/data formats
+       dhall
        emacs-lisp        ; drown in parentheses
        javascript
-       ;; (haskell +lsp)  ; a language that's lazier than I am
-       (haskell +dante)  ; a language that's lazier than I am
+       (haskell +lsp +ghcide)  ; a language that's lazier than I am
+       ;; (haskell +dante)  ; a language that's lazier than I am
        (latex +latexmk +pdf-tools +unicode-math)
        (markdown +pandoc)
        nix               ; I hereby declare "nix geht mehr!"
-       (org +jupyter +pandoc +beamer +roam)
+       (org +jupyter +pandoc +roam +pomodoro +present)
        purescript
-       racket
+       (racket +pollen)
        rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        (sh +fish)
        web               ; the tubes
        ;; my langs:
        coq
        idris
-       agda
+       (agda +local)
        scheme
+       yaml
 
        :app
        mu4e
