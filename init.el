@@ -27,7 +27,6 @@
 
        :editor
        (evil +everywhere)
-       file-templates
        fold
        format
        multiple-cursors
@@ -56,8 +55,6 @@
        (pass +auth)
        pdf
        ;; my tools:
-       org-noter
-       ebib
 
        :lang
        common-lisp       ; if you've seen one lisp, you've seen them all
@@ -71,7 +68,7 @@
        (latex +latexmk +pdf-tools +unicode-math)
        (markdown +pandoc)
        nix               ; I hereby declare "nix geht mehr!"
-       (org +jupyter +pandoc +roam +pomodoro +present)
+       (org +pandoc +roam +pomodoro +present +journal +noter)
        purescript
        (racket +pollen)
        rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
