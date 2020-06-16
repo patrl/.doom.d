@@ -35,9 +35,7 @@
       doom-variable-pitch-font (font-spec :family "iA Writer Duospace" :size 10.0)
       doom-unicode-font (font-spec :name "DejaVu Sans Mono"))
 
-(when (display-graphic-p)
-  (setq doom-theme 'doom-gruvbox) ;; uses doom-dracula theme in gui mode
-  (setq doom-theme 'doom-one)) ;; uses doom-one them otherwise
+(setq doom-theme 'doom-gruvbox)
 
 (load! "+bindings.el") ;; load my custom bindings
 
