@@ -20,5 +20,7 @@ See here for a nice notes setup using org and org-ref: [[https://rgoswami.me/pos
 ** [[https://github.com/jkitchin/org-ref][GitHub - jkitchin/org-ref: org-mode modules for citations, cross-references, ...]]
 ** [[https://github.com/org-roam/org-roam-bibtex][GitHub - org-roam/org-roam-bibtex: Connector between Org-roam, BibTeX-complet...]]
 
+I've tried to set-up org-roam-bibtex, but it doesn't seem to be working very well yet.
+
 * Dhall
 ** TODO make dhall doom module

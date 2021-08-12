@@ -25,9 +25,9 @@
         mu4e-compose-signature-auto-include t
         message-send-mail-function #'smtpmail-send-it ;; use emacs built-in smtpmail function to send mail
         smtpmail-stream-type 'starttls
-        ;; smtpmail-stream-type 'ssl
-        ;; smtpmail-debug-info t
-        ;; smtpmail-debug-verb t
+        smtpmail-stream-type 'ssl
+        smtpmail-debug-info t
+        smtpmail-debug-verb t
         mu4e-context-policy 'pick-first
         mu4e-compose-context-policy 'ask-if-none
         mu4e-completing-read-function (cond ((featurep! :completion ivy) #'ivy-completing-read)
@@ -76,6 +76,7 @@
                                                                  :to "pdell@mit.edu")))
              :vars `(
                      (mu4e-refile-folder . "/mit/archive")
+                     (mu4e-sent-messages-behavior . sent)
                      (mu4e-sent-folder . "/mit/sent")
                      (mu4e-trash-folder . "/mit/trash")
                      (mu4e-drafts-folder . "/mit/drafts")
@@ -84,7 +85,7 @@
                      (smtpmail-default-smtp-server . "outgoing.mit.edu")
                      (smtpmail-smtp-user . "pdell")
                      (smtpmail-smtp-server . "outgoing.mit.edu")
-                     (smtpmail-smtp-service . 587)
+                     (smtpmail-smtp-service . 465)
                      ;; my mit sig
                      (mu4e-compose-signature . (concat "Patrick D. Elliott\n"
                                                        "Postdoctoral Associate, Massachusetts Institute of Technology\n"
