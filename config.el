@@ -22,7 +22,7 @@
 ;; NixOS ;;
 ;;;;;;;;;;;
 
-;; (setq counsel-linux-apps-directories '("/var/run/current-system/sw/share/applications")) ;; FIXME This isn't actually ideal, since I'm installing almost everything via home-manager.
+;; (setq counsel-linux-apps-directories '("/var/run/current-system/sw/share/applications")) ;; FIXME This isn't actually ideal, since I'm installing almost everything via home-manager. I'm also not using ivy anymore.
 
 ;;;;;;;;;;;;;;;;
 ;; appearance ;;
@@ -48,14 +48,14 @@
 ;; direnv ;;
 ;;;;;;;;;;;;
 
-;; (add-hook 'before-hack-local-variables-hook #'direnv-update-environment)
+;; (add-hook 'before-hack-local-variables-hook #'direnv-update-environment) # TODO I can't remember why I needed this.
 
 ;;;;;;;;;;;;;;
 ;; org-mode ;;
 ;;;;;;;;;;;;;;
 
 ;; org-journal
-(setq org-journal-file-format "%Y%m%d.org")
+;; (setq org-journal-file-format "%Y%m%d.org") # I'm using org dailies now instead of org journal. Convert org journal entries to roam daily and move there.
 
 ;; general org-mode tweaks
 (after! org
@@ -64,19 +64,21 @@
 (setq org-directory (expand-file-name "~/Dropbox (MIT)/org/")
       org-archive-location (concat org-directory "archive/%s::")
       org-ellipsis " ▼ "
-      org-agenda-files (list org-directory)
+      org-agenda-files (list org-directory +notes-dir)
       org-superstar-headline-bullets-list '("#")
       org-highlight-latex-and-related '(latex) ;; highlight latex fragments
       )
 
 ;; deft tweaks
+;; TODO think about removing deft.
 (setq deft-directory +notes-dir)
 
-;; org-noter tweaks
+;; org-noter tweaks TODO fix org-noter
 (setq org-noter-notes-window-location 'other-frame
         org-noter-always-create-frame nil
         org-noter-hide-other nil
-        org-noter-notes-search-path +notes-dir)
+        org-noter-notes-search-path (list +notes-dir)
+        )
 
 ;;;;;;;;;;;;;;
 ;; org-roam ;;
@@ -112,7 +114,7 @@
                             :message "you need to install the programs: xelatex and dvisvgm."
                             :image-input-type "xdv"
                             :image-output-type "svg"
-                            :image-size-adjust (1.0 . 1.0)
+                            :image-size-adjust (0.5 . 0.5)
                             :latex-compiler ("xelatex -no-pdf -interaction nonstopmode -output-directory %o %f")
                             :image-converter ("dvisvgm %f -n -b min -c %S -o %O"))
                )
@@ -125,6 +127,7 @@
       (remove '("" "amssymb" t) org-latex-default-packages-alist))
 (add-to-list 'org-latex-packages-alist '("" "unicode-math"))
 (add-to-list 'org-latex-packages-alist '("" "libertine"))
+(add-to-list 'org-latex-packages-alist '("" "forest")) ;; FIXME this currently doesn't seem to be working.
 )
 
 
@@ -181,7 +184,7 @@
 ;; purescript ;;
 ;;;;;;;;;;;;;;;;
 
-(setq psc-ide-use-npm-bin t)
+(setq psc-ide-use-npm-bin t) ;; TODO can't remember why this is important
 
 ;;;;;;;;;;;;;
 ;; haskell ;;
